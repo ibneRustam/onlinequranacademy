@@ -3,6 +3,8 @@
 
 import { motion } from "framer-motion";
 import { useState } from "react";
+import countries from "@/app/data/countries";  
+
 import {
   FaEnvelope,
   FaWhatsapp,

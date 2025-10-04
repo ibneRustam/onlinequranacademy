@@ -8,6 +8,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
+import { useRouter } from "next/navigation"; // ✅ import router
 
 const courses = [
   {
@@ -64,6 +65,7 @@ export default function HeroSection() {
 
 function CourseSlide({ course }: { course: any }) {
   const [expanded, setExpanded] = useState(false);
+  const router = useRouter(); // ✅ hook for navigation
 
   return (
     <div className="relative w-full h-screen flex flex-col md:flex-row items-center justify-between px-8 md:px-20 pt-24">
@@ -98,8 +100,11 @@ function CourseSlide({ course }: { course: any }) {
             {expanded ? "Read Less" : "Read More"}
           </button>
 
-          {/* Start Now Button */}
-          <button className="px-6  py-3 bg-white text-black rounded-xl shadow-md hover:bg-gray-200 transition font-medium">
+          {/* Start Now Button → Go to /registration */}
+          <button
+            onClick={() => router.push("/registration")}
+            className="px-6 py-3 bg-white text-black rounded-xl shadow-md hover:bg-gray-200 transition font-medium"
+          >
             Start Now
           </button>
         </div>
