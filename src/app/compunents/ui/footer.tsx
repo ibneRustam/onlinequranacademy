@@ -1,6 +1,8 @@
 // components/ui/Footer.tsx
 import Link from "next/link";
 import Image from "next/image";
+import * as coursesData from "@/app/data/coursesData"; 
+import { Key, ReactElement, JSXElementConstructor, ReactNode, ReactPortal } from "react";
 
 export default function Footer() {
   return (
@@ -41,16 +43,20 @@ export default function Footer() {
           </ul>
         </nav>
 
-        {/* Courses */}
+        {/* Courses Section (Dynamic using slug) */}
         <nav aria-label="Quran and Arabic Courses">
           <h2 className="font-bold text-lg mb-3 uppercase tracking-wide text-white">Courses</h2>
           <ul className="space-y-2">
-            <li><Link href="/qaida" className="hover:text-blue-400 transition">Noorani Qaida Online</Link></li>
-            <li><Link href="/nazra" className="hover:text-blue-400 transition">Quran Reading with Tajweed</Link></li>
-            <li><Link href="/hifz" className="hover:text-blue-400 transition">Quran Memorization (Hifz)</Link></li>
-            <li><Link href="/tarjuma" className="hover:text-blue-400 transition">Quran Translation & Tafseer</Link></li>
-            <li><Link href="/tajweed" className="hover:text-blue-400 transition">Advanced Tajweed Course</Link></li>
-            <li><Link href="/arabic" className="hover:text-blue-400 transition">Arabic Language for Beginners</Link></li>
+            {coursesData.coursesData.slice(0, 6).map((course: { slug: Key | null | undefined; title: string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<string | number | bigint | boolean | ReactPortal | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined; }) => (
+              <li key={course.slug}>
+                <Link
+                  href={`/courses/${course.slug}`}
+                  className="hover:text-blue-400 transition"
+                >
+                  {course.title}
+                </Link>
+              </li>
+            ))}
           </ul>
         </nav>
 
@@ -63,7 +69,6 @@ export default function Footer() {
                 href="https://wa.me/923142969508"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="WhatsApp Chat with TaallumulQuran Academy"
                 className="flex items-center gap-2 hover:text-green-500 transition"
               >
                 <Image src="/whatsapp.png" width={20} height={20} alt="WhatsApp Icon" />
@@ -73,7 +78,6 @@ export default function Footer() {
             <li>
               <a
                 href="mailto:taallumulquranacademy@gmail.com"
-                aria-label="Send Email to TaallumulQuran Academy"
                 className="flex items-center gap-2 hover:text-red-500 transition"
               >
                 <Image src="/email.png" width={20} height={20} alt="Email Icon" />
@@ -85,7 +89,6 @@ export default function Footer() {
                 href="https://www.facebook.com/profile.php?id=61581040517143"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Facebook Page"
                 className="flex items-center gap-2 hover:text-blue-500 transition"
               >
                 <Image src="/facebook.png" width={20} height={20} alt="Facebook Icon" />
@@ -97,7 +100,6 @@ export default function Footer() {
                 href="https://www.instagram.com/taalumulquran/"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Instagram Profile"
                 className="flex items-center gap-2 hover:text-pink-500 transition"
               >
                 <Image src="/instagram.png" width={20} height={20} alt="Instagram Icon" />
@@ -109,7 +111,6 @@ export default function Footer() {
                 href="https://x.com/Taallumulquran"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Twitter / X Profile"
                 className="flex items-center gap-2 hover:text-slate-300 transition"
               >
                 <Image src="/twitter.png" width={20} height={20} alt="Twitter / X Icon" />
@@ -121,7 +122,6 @@ export default function Footer() {
                 href="https://www.linkedin.com/in/taallum-ul-quran-academy-1a1885386/"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="LinkedIn Profile"
                 className="flex items-center gap-2 hover:text-blue-400 transition"
               >
                 <Image src="/linkedin.png" width={20} height={20} alt="LinkedIn Icon" />
@@ -136,33 +136,6 @@ export default function Footer() {
       <div className="bg-gray-800 text-center py-4 text-sm text-gray-400">
         © {new Date().getFullYear()} TaallumulQuran Academy. All Rights Reserved.
       </div>
-
-      {/* JSON-LD Structured Data for SEO */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "EducationalOrganization",
-            "name": "TaallumulQuran Online Academy",
-            "url": "https://yourdomain.com",
-            "logo": "https://yourdomain.com/logo.jpg",
-            "sameAs": [
-              "https://www.facebook.com/profile.php?id=61581040517143",
-              "https://www.instagram.com/taalumulquran/",
-              "https://x.com/Taallumulquran",
-              "https://www.linkedin.com/in/taallum-ul-quran-academy-1a1885386/"
-            ],
-            "contactPoint": {
-              "@type": "ContactPoint",
-              "telephone": "+92-314-2969508",
-              "contactType": "customer service",
-              "areaServed": "PK",
-              "availableLanguage": ["English","Urdu","Arabic"]
-            }
-          }),
-        }}
-      />
     </footer>
   );
 }

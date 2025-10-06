@@ -9,6 +9,7 @@ import "swiper/css/pagination";
 
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import { useRouter } from "next/navigation"; // ✅ import router
+import { motion } from "framer-motion";
 
 const courses = [
   {
@@ -44,6 +45,7 @@ const courses = [
 export default function HeroSection() {
   return (
     <section className="relative w-full h-screen">
+
       <Swiper
         modules={[Navigation, Pagination, Autoplay]}
         spaceBetween={0}
@@ -80,6 +82,12 @@ function CourseSlide({ course }: { course: any }) {
       <div className="absolute inset-0 bg-black/60"></div>
 
       {/* Text Content */}
+      <motion.div
+          className="relative z-10 text-center text-white px-4"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+        >
       <div className="relative z-10 text-white max-w-xl">
         <h1 className="text-4xl md:text-6xl font-bold leading-snug drop-shadow-lg">
           {course.title}
@@ -107,9 +115,11 @@ function CourseSlide({ course }: { course: any }) {
           >
             Start Now
           </button>
+          
         </div>
+        
       </div>
-
+</motion.div>
       {/* Course Image */}
       <div className="relative z-10 mt-10 md:mt-0 w-full md:w-[420px] h-[280px] md:h-[420px]">
         <Image
