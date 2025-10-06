@@ -88,7 +88,7 @@ function CourseSlide({ course }: { course: any }) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-      <div className="relative z-10 text-white max-w-xl">
+      <div className="relative z-10 text-white max-w-xl text-start">
         <h1 className="text-4xl md:text-6xl font-bold leading-snug drop-shadow-lg">
           {course.title}
         </h1>
