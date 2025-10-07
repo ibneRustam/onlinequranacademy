@@ -1,22 +1,81 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import countries from "@/app/data/countries";
-import dialCodes from "@/app/data/dialcode";
+import { useState, useEffect, useMemo } from "react";
+import { DateTime } from "luxon";
+
+// ✅ Complete Country Data with Dial Codes
+const countriesWithDialCodes = [
+  { name: "Afghanistan", code: "+93", flag: "🇦🇫" },
+  { name: "Albania", code: "+355", flag: "🇦🇱" },
+  { name: "Algeria", code: "+213", flag: "🇩🇿" },
+  { name: "Andorra", code: "+376", flag: "🇦🇩" },
+  { name: "Angola", code: "+244", flag: "🇦🇴" },
+  { name: "Argentina", code: "+54", flag: "🇦🇷" },
+  { name: "Australia", code: "+61", flag: "🇦🇺" },
+  { name: "Austria", code: "+43", flag: "🇦🇹" },
+  { name: "Azerbaijan", code: "+994", flag: "🇦🇿" },
+  { name: "Bahrain", code: "+973", flag: "🇧🇭" },
+  { name: "Bangladesh", code: "+880", flag: "🇧🇩" },
+  { name: "Belgium", code: "+32", flag: "🇧🇪" },
+  { name: "Brazil", code: "+55", flag: "🇧🇷" },
+  { name: "Canada", code: "+1", flag: "🇨🇦" },
+  { name: "China", code: "+86", flag: "🇨🇳" },
+  { name: "Denmark", code: "+45", flag: "🇩🇰" },
+  { name: "Egypt", code: "+20", flag: "🇪🇬" },
+  { name: "Finland", code: "+358", flag: "🇫🇮" },
+  { name: "France", code: "+33", flag: "🇫🇷" },
+  { name: "Germany", code: "+49", flag: "🇩🇪" },
+  { name: "Greece", code: "+30", flag: "🇬🇷" },
+  { name: "India", code: "+91", flag: "🇮🇳" },
+  { name: "Indonesia", code: "+62", flag: "🇮🇩" },
+  { name: "Iran", code: "+98", flag: "🇮🇷" },
+  { name: "Iraq", code: "+964", flag: "🇮🇶" },
+  { name: "Ireland", code: "+353", flag: "🇮🇪" },
+  { name: "Italy", code: "+39", flag: "🇮🇹" },
+  { name: "Japan", code: "+81", flag: "🇯🇵" },
+  { name: "Jordan", code: "+962", flag: "🇯🇴" },
+  { name: "Kuwait", code: "+965", flag: "🇰🇼" },
+  { name: "Lebanon", code: "+961", flag: "🇱🇧" },
+  { name: "Malaysia", code: "+60", flag: "🇲🇾" },
+  { name: "Maldives", code: "+960", flag: "🇲🇻" },
+  { name: "Nepal", code: "+977", flag: "🇳🇵" },
+  { name: "Netherlands", code: "+31", flag: "🇳🇱" },
+  { name: "New Zealand", code: "+64", flag: "🇳🇿" },
+  { name: "Nigeria", code: "+234", flag: "🇳🇬" },
+  { name: "Norway", code: "+47", flag: "🇳🇴" },
+  { name: "Oman", code: "+968", flag: "🇴🇲" },
+  { name: "Pakistan", code: "+92", flag: "🇵🇰" },
+  { name: "Philippines", code: "+63", flag: "🇵🇭" },
+  { name: "Qatar", code: "+974", flag: "🇶🇦" },
+  { name: "Russia", code: "+7", flag: "🇷🇺" },
+  { name: "Saudi Arabia", code: "+966", flag: "🇸🇦" },
+  { name: "Singapore", code: "+65", flag: "🇸🇬" },
+  { name: "South Africa", code: "+27", flag: "🇿🇦" },
+  { name: "South Korea", code: "+82", flag: "🇰🇷" },
+  { name: "Spain", code: "+34", flag: "🇪🇸" },
+  { name: "Sri Lanka", code: "+94", flag: "🇱🇰" },
+  { name: "Sweden", code: "+46", flag: "🇸🇪" },
+  { name: "Switzerland", code: "+41", flag: "🇨🇭" },
+  { name: "Syria", code: "+963", flag: "🇸🇾" },
+  { name: "Thailand", code: "+66", flag: "🇹🇭" },
+  { name: "Turkey", code: "+90", flag: "🇹🇷" },
+  { name: "UAE", code: "+971", flag: "🇦🇪" },
+  { name: "UK", code: "+44", flag: "🇬🇧" },
+  { name: "USA", code: "+1", flag: "🇺🇸" },
+  { name: "Yemen", code: "+967", flag: "🇾🇪" },
+  { name: "Zimbabwe", code: "+263", flag: "🇿🇼" }
+];
 
 export default function BookTrialForm() {
   const [pakistanTime, setPakistanTime] = useState("");
   const [selectedCountry, setSelectedCountry] = useState("");
-  const [selectedTimeZone, setSelectedTimeZone] = useState("");
-  const [timezones, setTimezones] = useState<Record<string, string>>({});
   const [success, setSuccess] = useState(false);
-
-  useEffect(() => {
-    fetch("/timezones.json")
-      .then((res) => res.json())
-      .then((data) => setTimezones(data))
-      .catch((err) => console.error("Timezone load error:", err));
-  }, []);
+  const [loading, setLoading] = useState(false);
+  
+  // Phone Code Search State
+  const [phoneSearch, setPhoneSearch] = useState("");
+  const [selectedPhoneCode, setSelectedPhoneCode] = useState("+92");
+  const [isPhoneDropdownOpen, setIsPhoneDropdownOpen] = useState(false);
 
   const courses = [
     "Noorani Qaida",
@@ -29,86 +88,143 @@ export default function BookTrialForm() {
     "Fiqh & Islamic Rulings",
   ];
 
-  // ✅ Pakistan time converter
+  // ✅ Filtered Countries for Phone Search
+  const filteredPhoneCountries = useMemo(() => {
+    if (!phoneSearch) return countriesWithDialCodes;
+    return countriesWithDialCodes.filter(country =>
+      country.name.toLowerCase().includes(phoneSearch.toLowerCase()) ||
+      country.code.includes(phoneSearch)
+    );
+  }, [phoneSearch]);
+
+  // ✅ Complete Timezone Mapping
+  const getTimezoneForCountry = (country: string): string => {
+    const timezoneMap: Record<string, string> = {
+      "Afghanistan": "Asia/Kabul",
+      "Albania": "Europe/Tirane",
+      "Algeria": "Africa/Algiers",
+      "Andorra": "Europe/Andorra",
+      "Angola": "Africa/Luanda",
+      "Argentina": "America/Argentina/Buenos_Aires",
+      "Australia": "Australia/Sydney",
+      "Austria": "Europe/Vienna",
+      "Azerbaijan": "Asia/Baku",
+      "Bahrain": "Asia/Bahrain",
+      "Bangladesh": "Asia/Dhaka",
+      "Belgium": "Europe/Brussels",
+      "Brazil": "America/Sao_Paulo",
+      "Canada": "America/Toronto",
+      "China": "Asia/Shanghai",
+      "Denmark": "Europe/Copenhagen",
+      "Egypt": "Africa/Cairo",
+      "Finland": "Europe/Helsinki",
+      "France": "Europe/Paris",
+      "Germany": "Europe/Berlin",
+      "Greece": "Europe/Athens",
+      "India": "Asia/Kolkata",
+      "Indonesia": "Asia/Jakarta",
+      "Iran": "Asia/Tehran",
+      "Iraq": "Asia/Baghdad",
+      "Ireland": "Europe/Dublin",
+      "Italy": "Europe/Rome",
+      "Japan": "Asia/Tokyo",
+      "Jordan": "Asia/Amman",
+      "Kuwait": "Asia/Kuwait",
+      "Lebanon": "Asia/Beirut",
+      "Malaysia": "Asia/Kuala_Lumpur",
+      "Maldives": "Indian/Maldives",
+      "Nepal": "Asia/Kathmandu",
+      "Netherlands": "Europe/Amsterdam",
+      "New Zealand": "Pacific/Auckland",
+      "Nigeria": "Africa/Lagos",
+      "Norway": "Europe/Oslo",
+      "Oman": "Asia/Muscat",
+      "Pakistan": "Asia/Karachi",
+      "Philippines": "Asia/Manila",
+      "Qatar": "Asia/Qatar",
+      "Russia": "Europe/Moscow",
+      "Saudi Arabia": "Asia/Riyadh",
+      "Singapore": "Asia/Singapore",
+      "South Africa": "Africa/Johannesburg",
+      "South Korea": "Asia/Seoul",
+      "Spain": "Europe/Madrid",
+      "Sri Lanka": "Asia/Colombo",
+      "Sweden": "Europe/Stockholm",
+      "Switzerland": "Europe/Zurich",
+      "Syria": "Asia/Damascus",
+      "Thailand": "Asia/Bangkok",
+      "Turkey": "Europe/Istanbul",
+      "UAE": "Asia/Dubai",
+      "UK": "Europe/London",
+      "USA": "America/New_York",
+      "Yemen": "Asia/Aden",
+      "Zimbabwe": "Africa/Harare"
+    };
+
+    return timezoneMap[country] || "UTC";
+  };
+
+  // ✅ Timezone Conversion Function
   const convertToPakistanTime = () => {
+    const dateInput = (document.querySelector('input[name="bookingDate"]') as HTMLInputElement)?.value;
+    const timeInput = (document.querySelector('input[name="localTime"]') as HTMLInputElement)?.value;
+
+    if (!dateInput || !timeInput || !selectedCountry) {
+      setPakistanTime("");
+      return;
+    }
+
     try {
-      const dateInput = (document.querySelector(
-        'input[name="bookingDate"]'
-      ) as HTMLInputElement).value;
-      const timeInput = (document.querySelector(
-        'input[name="localTime"]'
-      ) as HTMLInputElement).value;
-      if (!dateInput || !timeInput || !selectedCountry) return;
+      const userTZ = getTimezoneForCountry(selectedCountry);
+      const userDateTime = DateTime.fromISO(`${dateInput}T${timeInput}`, { zone: userTZ });
+      const pkTime = userDateTime.setZone("Asia/Karachi");
 
-      const tzMap: Record<string, string> = {
-        Pakistan: "Asia/Karachi",
-        "United States": "America/New_York",
-        "United Kingdom": "Europe/London",
-        "Saudi Arabia": "Asia/Riyadh",
-        "UAE": "Asia/Dubai",
-      };
-
-      const userTZ = tzMap[selectedCountry] || "UTC";
-
-      const [year, month, day] = dateInput.split("-").map(Number);
-      const [hours, minutes] = timeInput.split(":").map(Number);
-
-      const userDateTime = new Date(Date.UTC(year, month - 1, day, hours, minutes));
-
-      const pkFormatter = new Intl.DateTimeFormat("en-PK", {
-        timeZone: "Asia/Karachi",
-        dateStyle: "medium",
-        timeStyle: "short",
-      });
-
-      const userFormatter = new Intl.DateTimeFormat("en-US", {
-        timeZone: userTZ,
-        dateStyle: "medium",
-        timeStyle: "short",
-      });
-
-      const formattedPkTime = pkFormatter.format(userDateTime);
-      const formattedUserTime = userFormatter.format(userDateTime);
+      if (!userDateTime.isValid || !pkTime.isValid) {
+        setPakistanTime("Invalid date/time selected");
+        return;
+      }
 
       setPakistanTime(
-        `User Time (${selectedCountry}): ${formattedUserTime} → Pakistan Time: ${formattedPkTime}`
+        `User (${selectedCountry}) Local Time: ${userDateTime.toFormat("dd-MM-yyyy hh:mm a")} → Pakistan Time: ${pkTime.toFormat("dd-MM-yyyy hh:mm a")}`
       );
-    } catch (err) {
-      console.error(err);
+    } catch (error) {
+      setPakistanTime("Error converting time");
     }
   };
 
-  // ✅ Form submit
-  const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    convertToPakistanTime();
+  }, [selectedCountry]);
 
-const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-  e.preventDefault();
-  setLoading(true); // 🔹 Start loading
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setLoading(true);
 
-  const form = e.currentTarget;
-  const formData = new FormData(form);
-  const data = Object.fromEntries(formData.entries());
-  data["pakistanTime"] = pakistanTime;
-  data["selectedCountry"] = selectedCountry;
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData.entries());
+    data["pakistanTime"] = pakistanTime;
+    data["selectedCountry"] = selectedCountry;
+    data["countryCode"] = selectedPhoneCode;
 
-  try {
-    const res = await fetch("/api/booking", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-    });
-    const result = await res.json();
-    if (result.success) {
-      setSuccess(true);
-    } else {
-      alert("Something went wrong! Try again.");
+    try {
+      const res = await fetch("/api/booking", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      const result = await res.json();
+      if (result.success) {
+        setSuccess(true);
+      } else {
+        alert("Something went wrong! Try again.");
+      }
+    } catch (err) {
+      alert("Error submitting form.");
+    } finally {
+      setLoading(false);
     }
-  } catch (err) {
-    alert("Error submitting form.");
-  } finally {
-    setLoading(false); // 🔹 Stop loading
-  }
-};
+  };
 
   return (
     <section className="max-w-4xl mx-auto bg-white p-8 rounded-2xl shadow-lg my-16">
@@ -119,36 +235,21 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
       {success ? (
         <div className="bg-green-100 text-green-800 p-6 rounded-xl text-center">
           <h3 className="text-xl font-semibold mb-2">✅ Booking Request Received!</h3>
-          <p>
-            آپ کی بُکنگ کی درخواست کامیابی سے موصول ہو چکی ہے۔ ان شاءاللہ ہم جلد آپ سے رابطہ کریں گے۔
-          </p>
+          <p>آپ کی بُکنگ کی درخواست کامیابی سے موصول ہو چکی ہے۔ ان شاءاللہ ہم جلد آپ سے رابطہ کریں گے۔</p>
         </div>
       ) : (
         <form onSubmit={handleSubmit} className="space-y-5">
-
           {/* Full Name */}
           <div>
             <label className="font-semibold text-gray-700">Full Name / پورا نام</label>
             <div className="grid md:grid-cols-2 gap-4 mt-1">
               <div>
                 <label className="text-sm text-gray-600">First Name / پہلا نام</label>
-                <input
-                  required
-                  type="text"
-                  name="firstName"
-                  placeholder="First Name"
-                  className="p-3 border rounded w-full mt-1"
-                />
+                <input required type="text" name="firstName" placeholder="First Name" className="p-3 border rounded w-full mt-1" />
               </div>
               <div>
                 <label className="text-sm text-gray-600">Last Name / آخری نام</label>
-                <input
-                  required
-                  type="text"
-                  name="lastName"
-                  placeholder="Last Name"
-                  className="p-3 border rounded w-full mt-1"
-                />
+                <input required type="text" name="lastName" placeholder="Last Name" className="p-3 border rounded w-full mt-1" />
               </div>
             </div>
           </div>
@@ -159,27 +260,16 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
             <div className="grid md:grid-cols-2 gap-4 mt-1">
               <div>
                 <label className="text-sm text-gray-600">Email / ای میل</label>
-                <input
-                  required
-                  type="email"
-                  name="email"
-                  placeholder="Email Address"
-                  className="p-3 border rounded w-full mt-1"
-                />
+                <input required type="email" name="email" placeholder="Email Address" className="p-3 border rounded w-full mt-1" />
               </div>
               <div>
                 <label className="text-sm text-gray-600">Date of Birth / تاریخ پیدائش</label>
-                <input
-                  required
-                  type="date"
-                  name="dob"
-                  className="p-3 border rounded w-full mt-1"
-                />
+                <input required type="date" name="dob" className="p-3 border rounded w-full mt-1" />
               </div>
             </div>
           </div>
 
-          {/* Gender & Contact */}
+          {/* Gender & Contact - UPDATED */}
           <div>
             <label className="font-semibold text-gray-700">Gender & Contact / صنف اور رابطہ نمبر</label>
             <div className="grid md:grid-cols-2 gap-4 mt-1">
@@ -191,28 +281,73 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
                   <option value="Female">Female</option>
                 </select>
               </div>
+              
+              {/* ✅ Modern Phone Input with Search */}
               <div>
                 <label className="text-sm text-gray-600">Contact Number / فون نمبر</label>
-                <div className="flex border rounded w-full mt-1">
-                  <select required name="countryCode" className="p-3 border-r w-24 bg-gray-50">
-                    <option value="">Code</option>
-                    {countries.map((country, i) => {
-                      const code = dialCodes[country] || "";
-                      return (
-                        code && (
-                          <option key={i} value={code}>
-                            {code}
-                          </option>
-                        )
-                      );
-                    })}
-                  </select>
-                  <input
-                    required
-                    type="tel"
-                    name="contact"
-                    placeholder="Contact Number"
-                    className="p-3 flex-1"
+                <div className="flex border rounded w-full mt-1 relative">
+                  {/* Phone Code Selector */}
+                  <div className="relative">
+                    <button
+                      type="button"
+                      onClick={() => setIsPhoneDropdownOpen(!isPhoneDropdownOpen)}
+                      className="p-3 border-r bg-gray-50 hover:bg-gray-100 w-32 flex items-center justify-between"
+                    >
+                      <span>{selectedPhoneCode}</span>
+                      <span>▼</span>
+                    </button>
+                    
+                    {/* Dropdown with Search */}
+                    {isPhoneDropdownOpen && (
+                      <div className="absolute top-full left-0 w-80 bg-white border rounded-lg shadow-lg z-50 max-h-80 overflow-hidden">
+                        {/* Search Input */}
+                        <div className="p-2 border-b">
+                          <input
+                            type="text"
+                            placeholder="Search country or code..."
+                            value={phoneSearch}
+                            onChange={(e) => setPhoneSearch(e.target.value)}
+                            className="w-full p-2 border rounded"
+                            autoFocus
+                          />
+                        </div>
+                        
+                        {/* Countries List */}
+                        <div className="overflow-y-auto max-h-60">
+                          {filteredPhoneCountries.map((country, index) => (
+                            <button
+                              key={index}
+                              type="button"
+                              onClick={() => {
+                                setSelectedPhoneCode(country.code);
+                                setIsPhoneDropdownOpen(false);
+                                setPhoneSearch("");
+                              }}
+                              className="w-full p-3 text-left hover:bg-gray-100 flex items-center gap-3"
+                            >
+                              <span className="text-xl">{country.flag}</span>
+                              <span className="flex-1">{country.name}</span>
+                              <span className="text-gray-600">{country.code}</span>
+                            </button>
+                          ))}
+                          
+                          {filteredPhoneCountries.length === 0 && (
+                            <div className="p-3 text-center text-gray-500">
+                              No countries found
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                  
+                  {/* Phone Number Input */}
+                  <input 
+                    required 
+                    type="tel" 
+                    name="contact" 
+                    placeholder="Phone Number" 
+                    className="p-3 flex-1" 
                   />
                 </div>
               </div>
@@ -229,29 +364,18 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
                   required
                   name="country"
                   className="p-3 border rounded w-full mt-1"
-                  onChange={(e) => {
-                    const selected = e.target.value;
-                    setSelectedCountry(selected);
-                    setSelectedTimeZone(timezones[selected] || "");
-                  }}
+                  onChange={(e) => setSelectedCountry(e.target.value)}
+                  value={selectedCountry}
                 >
                   <option value="">Select Country</option>
-                  {countries.map((country, i) => (
-                    <option key={i} value={country}>
-                      {country}
-                    </option>
+                  {countriesWithDialCodes.map((country, i) => (
+                    <option key={i} value={country.name}>{country.name}</option>
                   ))}
                 </select>
               </div>
               <div>
                 <label className="text-sm text-gray-600">City / شہر</label>
-                <input
-                  required
-                  type="text"
-                  name="city"
-                  placeholder="Enter City"
-                  className="p-3 border rounded w-full mt-1"
-                />
+                <input required type="text" name="city" placeholder="Enter City" className="p-3 border rounded w-full mt-1" />
               </div>
             </div>
           </div>
@@ -265,20 +389,13 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
                 <select required name="course" className="p-3 border rounded w-full mt-1">
                   <option value="">Select Course</option>
                   {courses.map((course, i) => (
-                    <option key={i} value={course}>
-                      {course}
-                    </option>
+                    <option key={i} value={course}>{course}</option>
                   ))}
                 </select>
               </div>
               <div>
                 <label className="text-sm text-gray-600">Custom Topic / اضافی موضوع</label>
-                <input
-                  type="text"
-                  name="customTopic"
-                  placeholder="Add Custom Topic (optional)"
-                  className="p-3 border rounded w-full mt-1"
-                />
+                <input type="text" name="customTopic" placeholder="Add Custom Topic (optional)" className="p-3 border rounded w-full mt-1" />
               </div>
             </div>
           </div>
@@ -289,35 +406,39 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
             <div className="grid md:grid-cols-2 gap-4 mt-1">
               <div>
                 <label className="text-sm text-gray-600">Booking Date / تاریخ</label>
-                <input required type="date" name="bookingDate" className="p-3 border rounded w-full mt-1" />
+                <input 
+                  required 
+                  type="date" 
+                  name="bookingDate" 
+                  className="p-3 border rounded w-full mt-1" 
+                  onChange={convertToPakistanTime} 
+                  min={new Date().toISOString().split('T')[0]}
+                />
               </div>
               <div>
                 <label className="text-sm text-gray-600">Local Time / مقامی وقت</label>
-                <input required type="time" name="localTime" className="p-3 border rounded w-full mt-1" />
+                <input 
+                  required 
+                  type="time" 
+                  name="localTime" 
+                  className="p-3 border rounded w-full mt-1" 
+                  onChange={convertToPakistanTime} 
+                />
               </div>
             </div>
           </div>
 
-          {/* Time Converter */}
+          {/* Time Converter Display */}
           <div>
-            <label className="font-semibold text-gray-700">Convert to Pakistan Time / پاکستانی وقت میں تبدیلی</label>
-            <div className="grid md:grid-cols-2 gap-4 mt-1">
-              <button
-                type="button"
-                onClick={convertToPakistanTime}
-                className="bg-indigo-500 text-white py-3 rounded-md hover:bg-indigo-600 transition"
-              >
-                Convert to Pakistan Time
-              </button>
-              <input
-                type="text"
-                readOnly
-                name="pakistanTime"
-                value={pakistanTime}
-                placeholder="Pakistan Time will appear here"
-                className="p-3 border rounded bg-gray-100 w-full"
-              />
-            </div>
+            <label className="font-semibold text-gray-700">Pakistan Time / پاکستانی وقت</label>
+            <input
+              type="text"
+              readOnly
+              name="pakistanTime"
+              value={pakistanTime}
+              placeholder="Select country, date and time to see Pakistan time"
+              className="p-3 border rounded bg-gray-100 w-full mt-1 text-center font-medium"
+            />
           </div>
 
           {/* Teacher Gender */}
@@ -334,22 +455,17 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
           {/* Message */}
           <div>
             <label className="font-semibold text-gray-700">Special Message / خصوصی پیغام</label>
-            <textarea
-              name="message"
-              placeholder="Write your message (optional)"
-              className="p-3 border rounded w-full mt-1"
-              rows={4}
-            ></textarea>
+            <textarea name="message" placeholder="Write your message (optional)" className="p-3 border rounded w-full mt-1" rows={4}></textarea>
           </div>
 
           {/* Submit */}
-<button
-  type="submit"
-  disabled={loading}
-  className="bg-indigo-600 text-white px-8 py-3 rounded-full w-full hover:bg-indigo-700 transition disabled:opacity-50"
->
-  {loading ? "Submitting..." : "Send Booking Request / بُکنگ کی درخواست بھیجیں"}
-</button>
+          <button
+            type="submit"
+            disabled={loading}
+            className="bg-indigo-600 text-white px-8 py-3 rounded-full w-full hover:bg-indigo-700 transition disabled:opacity-50"
+          >
+            {loading ? "Submitting..." : "Send Booking Request / بُکنگ کی درخواست بھیجیں"}
+          </button>
         </form>
       )}
     </section>
