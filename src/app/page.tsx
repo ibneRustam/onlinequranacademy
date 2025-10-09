@@ -1,7 +1,4 @@
-import Image from "next/image";
-import Link from "next/link";
 
-// app/page.tsx
 import HeroSection from "@/app/compunents/ui/heroSection";
 import IntroSection from "./compunents/ui/introSection";
 import CoursesSection from "./compunents/ui/courses";

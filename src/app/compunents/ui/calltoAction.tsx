@@ -1,5 +1,5 @@
 "use client";
-
+import Image from "next/image";
 import { motion } from "framer-motion";
 import Link from "next/link";
 
@@ -7,7 +7,7 @@ export default function CtaSection() {
   return (
     <section className="relative w-full py-16 md:py-24 flex items-center">
       {/* Background Image */}
-      <img
+      <Image
         src="/quran11.jpg"
         alt="Open Quran Background - Online Islamic Learning"
         className="absolute inset-0 w-full h-full object-cover"

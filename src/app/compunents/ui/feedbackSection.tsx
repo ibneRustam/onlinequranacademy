@@ -4,8 +4,17 @@ import { useState } from "react";
 import { Quote, User, UserCircle2 } from "lucide-react";
 import { motion } from "framer-motion";
 
+interface Feedback {
+  id: number;
+  gender: "male" | "female";
+  name: string;
+  role: string;
+  country: string;
+  feedback: string;
+}
+
 export default function FeedbackSection() {
-  const feedbacks = [
+  const feedbacks: Feedback[] = [
     {
       id: 1,
       gender: "male",
@@ -13,7 +22,7 @@ export default function FeedbackSection() {
       role: "Hifz Student",
       country: "Canada",
       feedback:
-        "Alhamdulillah, Educafe teachers are very supportive. Their teaching style made my Hifz journey much easier and enjoyable.",
+        "Alhamdulillah, TaallumulQuran teachers are very supportive. Their teaching style made my Hifz journey much easier and enjoyable.",
     },
     {
       id: 2,
@@ -66,7 +75,7 @@ export default function FeedbackSection() {
   );
 }
 
-function FeedbackCard({ item }: { item: any }) {
+function FeedbackCard({ item }: { item: Feedback }) {
   const [expanded, setExpanded] = useState(false);
   const maxLength = 120;
 
@@ -82,7 +91,7 @@ function FeedbackCard({ item }: { item: any }) {
 
       {/* Feedback Text */}
       <p className="text-gray-700 leading-relaxed mb-4 mt-4">
-        "{expanded ? item.feedback : shortText}"
+        &quot;{expanded ? item.feedback : shortText}&quot;
       </p>
 
       {/* Read More / Less */}

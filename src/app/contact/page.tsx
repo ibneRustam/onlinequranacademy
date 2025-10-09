@@ -1,7 +1,7 @@
-// app/contact/page.tsx
+
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import countries from "@/app/data/countries"; 
 import dialCodes from "@/app/data/dialcode"; 
@@ -28,111 +28,138 @@ export default function ContactPage() {
   });
 
   const [status, setStatus] = useState("");
-  const [selectedDial, setSelectedDial] = useState("+92"); 
-  const alias: Record<string, string> = {
+  // const [selectedDial, setSelectedDial] = useState("+92"); 
+
+  const alias = useMemo (() => ({
     USA: "United States",
     UK: "United Kingdom",
     UAE: "United Arab Emirates",
-  };
+  }), []);
 
-  useEffect(() => {
-    const raw = formData.country;
-    const key = alias[raw] ?? raw;
-    const code = (dialCodes as Record<string, string>)[key] ?? "+92";
-    setSelectedDial(code);
-  }, [formData.country]);
-
+useEffect(() => {
+  const raw = formData.country;
+  const key = alias[raw as keyof typeof alias] ?? raw;
+}, [formData.country, alias]);
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault();
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
 
-  if (!formData.name || !formData.email || !formData.phone || !formData.message) {
-    setStatus("⚠️ Please fill in all required fields before submitting.");
-    return;
-  }
-
-  setStatus("⏳ Sending...");
-  try {
-    const res = await fetch("/api/contact", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(formData),
-    });
-
-    const data = await res.json();
-    if (data.success) {
-      setStatus("✅ Message sent successfully! We will contact you soon, Insha’Allah.");
-     setFormData({ name: "", email: "", country: "", phone: "", message: "" });
-    } else {
-      setStatus("❌ Failed to send message. Please try again.");
+    if (!formData.name || !formData.email || !formData.phone || !formData.message) {
+      setStatus("⚠️ Please fill in all required fields before submitting.");
+      return;
     }
-  } catch (err) {
-    setStatus("❌ Something went wrong. Please try again later.");
-  }
-};
+
+    setStatus("⏳ Sending...");
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await res.json();
+      if (data.success) {
+        setStatus("✅ Message sent successfully! We will contact you soon, Insha'Allah.");
+        setFormData({ name: "", email: "", country: "", phone: "", message: "" });
+      } else {
+        setStatus("❌ Failed to send message. Please try again.");
+      }
+    } catch (error) { 
+      console.error("Contact form error:", error);
+      setStatus("❌ Something went wrong. Please try again later.");
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gray-100">
-      {/* Hero */}
-      <div
+      {/* Hero Section with SEO-rich content */}
+      <section
         className="relative h-[350px] bg-cover bg-center"
         style={{ backgroundImage: "url('/quran9.jpeg')" }}
+        aria-label="Contact TaallumulQuran Academy for Quran classes"
       >
         <div className="absolute inset-0 bg-black/70 flex items-center justify-center px-4">
-          <motion.h1
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-4xl md:text-5xl font-bold text-white text-center"
+            className="text-center text-white"
           >
-            Contact Us
-          </motion.h1>
+            {/* SEO-rich Heading */}
+            <h1 className="text-4xl md:text-5xl font-bold mb-4">
+              Contact Us
+            </h1>
+            <p className="text-lg md:text-xl max-w-2xl mx-auto">
+              Get in touch for online Quran classes, Tajweed courses, Hifz program and Islamic studies with certified teachers
+            </p>
+          </motion.div>
         </div>
-      </div>
+      </section>
 
-      {/* Main Section */}
-      <div className="max-w-6xl mx-auto px-6 py-12 grid md:grid-cols-2 gap-10">
-        {/* Left: Form */}
-        <div className="bg-white shadow-lg rounded-2xl p-8">
-          <h2 className="text-2xl font-semibold mb-6">Send us a message</h2>
+      {/* Main Content with Semantic HTML */}
+      <section className="max-w-6xl mx-auto px-6 py-12 grid md:grid-cols-2 gap-10">
+        
+        {/* Contact Form */}
+        <article className="bg-white shadow-lg rounded-2xl p-8">
+          <h2 className="text-2xl font-semibold mb-6 text-gray-800">
+            Send Message for Quran Classes Inquiry
+          </h2>
 
           <form onSubmit={handleSubmit} className="space-y-4" noValidate>
-            <input
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              placeholder="Your Name"
-              className="w-full p-3 border rounded-lg"
-              required
-            />
+            <div>
+              <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+                Your Name *
+              </label>
+              <input
+                id="name"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                placeholder="Enter your full name"
+                className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                required
+                aria-required="true"
+              />
+            </div>
 
-            <input
-              name="email"
-              type="email"
-              value={formData.email}
-              onChange={handleChange}
-              placeholder="Your Email"
-              className="w-full p-3 border rounded-lg"
-              required
-            />
+            <div>
+              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                Email Address *
+              </label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                value={formData.email}
+                onChange={handleChange}
+                placeholder="your.email@example.com"
+                className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                required
+                aria-required="true"
+              />
+            </div>
 
-            {/* Unified Country + Dial Code + Phone in ONE Row */}
+            {/* Country and Phone */}
             <div className="flex flex-col md:flex-row gap-3">
               <div className="flex-1">
-                <label htmlFor="country" className="sr-only">Country</label>
+                <label htmlFor="country" className="block text-sm font-medium text-gray-700 mb-1">
+                  Country *
+                </label>
                 <select
                   id="country"
                   name="country"
                   value={formData.country}
                   onChange={handleChange}
-                  className="w-full p-3 border rounded-lg"
+                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
                   required
+                  aria-required="true"
                 >
-                  <option value="">Select Country</option>
+                  <option value="">Select Your Country</option>
                   {countries.map((c, i) => {
                     const dial = (dialCodes as Record<string, string>)[c] ?? "";
                     return (
@@ -144,129 +171,209 @@ const handleSubmit = async (e: React.FormEvent) => {
                 </select>
               </div>
 
-              <input
-                name="phone"
-                value={formData.phone}
+              <div className="flex-1">
+                <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
+                  Phone Number *
+                </label>
+                <input
+                  id="phone"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  placeholder="+92 300 1234567"
+                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                  required
+                  aria-required="true"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
+                Message *
+              </label>
+              <textarea
+                id="message"
+                name="message"
+                value={formData.message}
                 onChange={handleChange}
-                placeholder="Phone number"
-                className="flex-1 p-3 border rounded-lg"
+                placeholder="Tell us about your Quran learning goals... (e.g., Tajweed course, Hifz program, Islamic studies, free trial request)"
+                rows={4}
+                className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
                 required
+                aria-required="true"
               />
             </div>
 
-            <textarea
-              name="message"
-              value={formData.message}
-              onChange={handleChange}
-              placeholder="Your Message"
-              rows={4}
-              className="w-full p-3 border rounded-lg"
-              required
-            />
-
             <button
               type="submit"
-              className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition"
+              className="w-full bg-green-600 text-white py-3 rounded-lg hover:bg-green-700 transition font-semibold shadow-md hover:shadow-lg"
+              aria-label="Send message for Quran classes inquiry"
             >
-              Send Message
+              Send Message 
             </button>
           </form>
 
           {status && (
-  <motion.p
-    key={status}
-    initial={{ opacity: 0, y: 10 }}
-    animate={{ opacity: 1, y: 0 }}
-    exit={{ opacity: 0, y: -10 }}
-    transition={{ duration: 0.4 }}
-    className={`mt-4 text-center text-sm font-medium ${
-      status.includes("✅")
-        ? "text-green-600"
-        : status.includes("⚠️")
-        ? "text-yellow-600"
-        : "text-red-600"
-    }`}
-  >
-    {status}
-  </motion.p>
-)}
+            <motion.p
+              key={status}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.4 }}
+              className={`mt-4 text-center text-sm font-medium ${
+                status.includes("✅")
+                  ? "text-green-600"
+                  : status.includes("⚠️")
+                  ? "text-yellow-600"
+                  : "text-red-600"
+              }`}
+              role="alert"
+            >
+              {status}
+            </motion.p>
+          )}
+        </article>
 
-        </div>
+        {/* Contact Information */}
+        <aside>
+          <h2 className="text-2xl font-semibold mb-4 text-gray-800">
+            Quran Academy Contact Information
+          </h2>
+          <p className="mb-6 text-gray-600">
+            Connect with TaallumulQuran Academy for online Quran learning programs, 
+            Tajweed courses, Hifz memorization, and Islamic studies with certified teachers.
+          </p>
 
-        {/* Right: Contact Info */}
-        <div>
-          <h2 className="text-2xl font-semibold mb-4">Contact Information</h2>
-          <p className="mb-4 text-gray-600">We’d love to hear from you. Reach out through any channel below.</p>
+          <ul className="space-y-4 text-lg">
+  <li className="flex items-center gap-3">
+    <FaEnvelope className="text-red-500 text-xl" aria-hidden="true" />
+    <a 
+      href="mailto:taallumulquranacademy@gmail.com" 
+      className="text-green-700 hover:text-blue-800 hover:underline transition-colors"
+      aria-label="Send email to TaallumulQuran Academy"
+    >
+      taallumulquranacademy@gmail.com
+    </a>
+  </li>
+  
+  <li className="flex items-center gap-3">
+    <FaWhatsapp className="text-green-600 text-xl" aria-hidden="true" />
+    <a 
+      href="https://wa.me/923142969508" 
+      target="_blank" 
+      rel="noopener noreferrer" 
+      className="text-green-700 hover:text-blue-800 hover:underline transition-colors"
+      aria-label="Contact via WhatsApp for Quran classes"
+    >
+      WhatsApp: +92 314 2969508
+    </a>
+  </li>
+  
+  <li className="flex items-center gap-3">
+    <FaPhone className="text-blue-600 text-xl" aria-hidden="true" />
+    <a 
+      href="tel:+923142969508" 
+      className="text-green-700 hover:text-blue-800 hover:underline transition-colors"
+      aria-label="Call TaallumulQuran Academy"
+    >
+      Call: +92 314 2969508
+    </a>
+  </li>
 
-          <ul className="space-y-3 text-lg">
-            <li className="flex items-center gap-3">
-              <FaEnvelope className="text-red-500" />
-              <a href="mailto:taallumulquranacademy@gmail.com" className="text-blue-600 hover:underline">
-                taallumulquranacademy@gmail.com
-              </a>
-            </li>
-            <li className="flex items-center gap-3">
-              <FaWhatsapp className="text-green-600" />
-              <a href="https://wa.me/923142969508" target="_blank" rel="noreferrer" className="text-blue-600 hover:underline">
-                WhatsApp Chat
-              </a>
-            </li>
-            <li className="flex items-center gap-3">
-              <FaPhone className="text-blue-800" />
-              <a href="tel:+923142969508" className="text-blue-600 hover:underline">
-                +92 314 2969508 (Call Now)
-              </a>
-            </li>
-            <li className="flex items-center gap-3">
-              <FaFacebook className="text-blue-700" />
-              <a href="https://www.facebook.com/profile.php?id=61581040517143" target="_blank" rel="noreferrer" className="text-blue-600 hover:underline">
-                Facebook
-              </a>
-            </li>
-            <li className="flex items-center gap-3">
-              <FaLinkedin className="text-blue-700" />
-              <a href="https://www.linkedin.com/in/taallum-ul-quran-academy-1a1885386/" target="_blank" rel="noreferrer" className="text-blue-600 hover:underline">
-                LinkedIn
-              </a>
-            </li>
-            <li className="flex items-center gap-3">
-              <FaInstagram className="text-pink-600" />
-              <a href="https://www.instagram.com/taalumulquran/" target="_blank" rel="noreferrer" className="text-blue-600 hover:underline">
-                Instagram
-              </a>
-            </li>
-            <li className="flex items-center gap-3">
-              <FaTwitter className="text-black" />
-              <a href="https://x.com/Taallumulquran" target="_blank" rel="noreferrer" className="text-blue-600 hover:underline">
-                Twitter (X)
-              </a>
-            </li>
-          </ul>
-
-          <div className="mt-6">
+  {/* Social Media Links */}
+  <li className="flex items-center gap-3">
+    <FaLinkedin className="text-blue-700 text-xl" aria-hidden="true" />
+    <a 
+      href="https://www.linkedin.com/company/taallumul-quran-academy" 
+      target="_blank" 
+      rel="noopener noreferrer" 
+      className="text-green-700 hover:text-blue-800 hover:underline transition-colors"
+      aria-label="Follow TaallumulQuran on Linkedin"
+    >
+      Linkedin
+    </a>
+  </li>
+  
+  <li className="flex items-center gap-3">
+    <FaFacebook className="text-blue-700 text-xl" aria-hidden="true" />
+    <a 
+      href="https://www.facebook.com/profile.php?id=61581040517143" 
+      target="_blank" 
+      rel="noopener noreferrer" 
+      className="text-green-700 hover:text-blue-800 hover:underline transition-colors"
+      aria-label="Follow TaallumulQuran on Facebook"
+    >
+      Facebook Page
+    </a>
+  </li>
+  
+  <li className="flex items-center gap-3">
+    <FaInstagram className="text-pink-600 text-xl" aria-hidden="true" />
+    <a 
+      href="https://www.instagram.com/taalumulquran/" 
+      target="_blank" 
+      rel="noopener noreferrer" 
+      className="text-green-700 hover:text-blue-800 hover:underline transition-colors"
+      aria-label="Follow TaallumulQuran on Instagram"
+    >
+      Instagram
+    </a>
+  </li>
+  
+  
+  <li className="flex items-center gap-3">
+    <FaTwitter className="text-blue-400 text-xl" aria-hidden="true" />
+    <a 
+      href="https://x.com/Taallumulquran" 
+      target="_blank" 
+      rel="noopener noreferrer" 
+      className="text-green-700 hover:text-blue-800 hover:underline transition-colors"
+      aria-label="Follow TaallumulQuran on Twitter"
+    >
+      Twitter / X
+    </a>
+  </li>
+</ul>
+          {/* Location */}
+          <div className="mt-8">
+            <h3 className="text-lg font-semibold mb-3 text-gray-800">Academy Location</h3>
             <p className="flex items-center gap-2 text-gray-800 mb-3">
-              <FaMapMarkerAlt className="text-red-600" />
+              <FaMapMarkerAlt className="text-red-600 text-xl" aria-hidden="true" />
               <a
                 href="https://www.google.com/maps/place/Jamshed+Rd,+Karachi/"
                 target="_blank"
-                rel="noreferrer"
-                className="text-indigo-600 hover:underline"
+                rel="noopener noreferrer"
+                className="text-green-700 hover:text-blue-800 hover:underline transition-colors"
+                aria-label="View academy location on Google Maps"
               >
-                Location: Jamshaid Road No 1, Karachi, Pakistan
+                Jamshed Road No 1, Karachi, Pakistan
               </a>
             </p>
             <iframe
-              title="Taallumul Quran Academy - Jamshed Rd"
+              title="Taallumul Quran Academy Location - Jamshed Road Karachi Pakistan"
               src="https://www.google.com/maps?q=24.8835416,67.0470572&z=19&output=embed"
               width="100%"
               height="250"
               loading="lazy"
-              className="rounded-lg border-0"
+              className="rounded-lg border-0 shadow-md"
               referrerPolicy="no-referrer-when-downgrade"
+              aria-label="Map showing TaallumulQuran Academy location in Karachi"
             ></iframe>
           </div>
-        </div>
-      </div>
+
+          {/* SEO Content Section */}
+          <div className="mt-8 p-6 bg-green-50 rounded-lg">
+            <h3 className="text-lg font-semibold mb-3 text-gray-800">Online Quran Learning Academy</h3>
+            <p className="text-gray-700 text-sm leading-relaxed">
+              <strong>TaallumulQuran Academy</strong> offers comprehensive online Quran education including 
+              <strong> Tajweed courses, Hifz memorization program, Islamic studies,</strong> and 
+              <strong> Quran reading classes</strong> with certified teachers. Available worldwide 
+              with flexible schedules and free trial classes. Contact us for personalized Quran learning solutions.
+            </p>
+          </div>
+        </aside>
+      </section>
     </div>
   );
 }

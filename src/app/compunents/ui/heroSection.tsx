@@ -6,37 +6,36 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
-import { useRouter } from "next/navigation"; // ✅ import router
+import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 
 const courses = [
   {
     title: "Learn Quran Online",
-    short: "Online Quran learning with expert teachers. Join now to start your journey of Islamic knowledge.",
-    long: "Online Quran learning with expert teachers. Join now to start your journey of Islamic knowledge. This program provides structured lessons, personalized feedback, and guidance to make learning easy and effective.",
+    short: "Online Quran learning with expert teachers. Join now to start your journey.",
+    long: "Online Quran learning with expert teachers. Join now to start your journey of Islamic knowledge. Structured lessons, personalized feedback, and expert guidance.",
     img: "/quran.jpeg",
     bg: "/quran2.jpeg",
   },
   {
-    title: "Hifz Course",
+    title: "Hifz Course", 
     short: "Memorize the Quran with proper guidance and structured lessons.",
-    long: "Memorize the Quran with proper guidance, structured lessons, and a schedule that suits you. Our teachers provide individual attention, helping you build consistency, accuracy, and strong memorization skills.",
+    long: "Memorize the Quran with proper guidance, structured lessons, and flexible schedule. Individual attention from certified Huffaz.",
     img: "/quran3.jpeg",
     bg: "/quran5.jpeg",
   },
   {
     title: "Tajweed Course",
     short: "Learn to recite the Quran with correct pronunciation and rules.",
-    long: "Learn to recite the Quran with correct pronunciation and rules of Tajweed. This course ensures fluency, clarity, and confidence in recitation while avoiding common mistakes.",
-    img: "/tajweed.jpeg",
+    long: "Learn to recite the Quran with correct pronunciation and rules of Tajweed. Ensure fluency, clarity, and confidence in recitation.",
+    img: "/tajweed.jpeg", 
     bg: "/quran4.jpeg",
   },
   {
     title: "Tafseer Course",
-    short: "Dive deeper into the meanings of the Quran and understand the wisdom behind each verse.",
-    long: "Dive deeper into the meanings of the Quran and understand the wisdom behind each verse. This detailed Tafseer program covers word-by-word explanation, background of revelation, and practical lessons for daily life. Strengthen your faith and apply the Quran's guidance with confidence.",
+    short: "Understand the deep meanings of Quranic verses with explanations.",
+    long: "Understand the deep meanings of Quranic verses with detailed explanations. Word-by-word analysis and practical life lessons.",
     img: "/tafsir.jpeg",
     bg: "/masjid.jpeg",
   },
@@ -45,19 +44,17 @@ const courses = [
 export default function HeroSection() {
   return (
     <section className="relative w-full h-screen">
-
       <Swiper
         modules={[Navigation, Pagination, Autoplay]}
-        spaceBetween={0}
-        slidesPerView={1}
         navigation
         pagination={{ clickable: true }}
-        autoplay={{ delay: 4000 }}
-        className="w-full h-full"
+        autoplay={{ delay: 5000 }}
+        loop={true}
+        className="h-full"
       >
         {courses.map((course, index) => (
           <SwiperSlide key={index}>
-            <CourseSlide course={course} />
+            <SlideContent course={course} />
           </SwiperSlide>
         ))}
       </Swiper>
@@ -65,69 +62,112 @@ export default function HeroSection() {
   );
 }
 
-function CourseSlide({ course }: { course: any }) {
+type Course = {
+  title: string;
+  short: string;
+  long: string;
+  img: string;
+  bg: string;
+};
+
+function SlideContent({ course }: { course: Course }) {
   const [expanded, setExpanded] = useState(false);
-  const router = useRouter(); // ✅ hook for navigation
+  const router = useRouter();
 
   return (
-    <div className="relative w-full h-screen flex flex-col md:flex-row items-center justify-between px-8 md:px-20 pt-24">
-      {/* Background Image */}
+    <div className="relative h-full flex items-center">
+      {/* Background */}
       <Image
         src={course.bg}
         alt={course.title}
         fill
-        priority
         className="object-cover"
+        priority
       />
-      <div className="absolute inset-0 bg-black/60"></div>
+      <div className="absolute inset-0 bg-black/50" />
 
-      {/* Text Content */}
-      <motion.div
-          className="relative z-10 text-center text-white px-4"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+      {/* Content */}
+      <div className="relative z-10 max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-8 items-center w-full">
+        
+        {/* Text Content with Animations */}
+        <motion.div 
+          className="text-white space-y-6"
+          initial={{ opacity: 0, x: -50 }}
+          animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
         >
-      <div className="relative z-10 text-white max-w-xl text-start">
-        <h1 className="text-4xl md:text-6xl font-bold leading-snug drop-shadow-lg">
-          {course.title}
-        </h1>
-
-        <p className="mt-4 text-base md:text-lg leading-relaxed drop-shadow">
-          {expanded ? course.long : course.short}
-        </p>
-
-        {/* Buttons Wrapper */}
-        <div className="mt-4 flex flex-col sm:flex-col gap-8 items-start ">
-          {/* Read More / Less */}
-          <button
-            onClick={() => setExpanded(!expanded)}
-            className="px-4 py-3 text-sm underline text-gray-200 hover:text-white"
-            aria-expanded={expanded}
+          <motion.h1
+            className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
           >
-            {expanded ? "Read Less" : "Read More"}
-          </button>
+            {course.title}
+          </motion.h1>
 
-          {/* Start Now Button → Go to /registration */}
-          <button
-            onClick={() => router.push("/registration")}
-            className="px-6 py-3 bg-white text-black rounded-xl shadow-md hover:bg-gray-200 transition font-medium"
+          <motion.p
+            className="text-lg md:text-xl leading-relaxed max-w-2xl"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
           >
-            Start Now
-          </button>
-          
-        </div>
-        
-      </div>
-</motion.div>
-      {/* Course Image */}
-      <div className="relative z-10 mt-10 md:mt-0 w-full md:w-[420px] h-[280px] md:h-[420px]">
-        <Image
-          src={course.img}
-          alt={`${course.title} illustration`}
-          fill
-          className="rounded-xl shadow-lg object-cover"
-        />
+            {expanded ? course.long : course.short}
+          </motion.p>
+
+          {/* Buttons with Animations */}
+          <motion.div 
+            className="flex flex-col sm:flex-row gap-4 items-start"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+          >
+            <motion.button
+              onClick={() => setExpanded(!expanded)}
+              className="text-white underline hover:no-underline transition"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              {expanded ? "Read Less" : "Read More"}
+            </motion.button>
+          </motion.div>
+
+          <motion.div 
+            className="flex gap-4"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.8 }}
+          >
+            <motion.button
+              onClick={() => router.push("/registration")}
+              className="bg-green-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-green-700 transition shadow-lg"
+              whileHover={{ scale: 1.05, boxShadow: "0 10px 25px rgba(0,0,0,0.3)" }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Start Free Trial
+            </motion.button>
+          </motion.div>
+        </motion.div>
+
+        {/* Image with Animation */}
+        <motion.div 
+          className="flex justify-center"
+          initial={{ opacity: 0, x: 50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, delay: 0.3 }}
+        >
+          <motion.div 
+            className="relative w-80 h-80 md:w-96 md:h-96 rounded-2xl overflow-hidden shadow-2xl"
+            whileHover={{ scale: 1.05 }}
+            transition={{ type: "spring", stiffness: 300 }}
+          >
+            <Image
+              src={course.img}
+              alt={course.title}
+              fill
+              className="object-cover"
+            />
+          </motion.div>
+        </motion.div>
       </div>
     </div>
   );

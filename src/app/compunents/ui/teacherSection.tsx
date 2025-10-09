@@ -1,8 +1,8 @@
-// app/components/ui/TeachersSection.tsx
+
 "use client";
 
 import Link from "next/link";
-import { User, UserCircle2, GraduationCap } from "lucide-react";
+import { User, UserCircle2, } from "lucide-react";
 
 export default function TeachersSection() {
   const teachers = [
@@ -96,12 +96,13 @@ export default function TeachersSection() {
 
       {/* See All Teachers Button */}
       <div className="text-center mt-14">
-        <Link
-          href="/teachers"
-          className="inline-block px-6 py-3 bg-blue-600 text-white rounded-full font-medium hover:bg-blue-700 transition"
-        >
-          View All Teachers
-        </Link>
+      <Link
+  href="/teachers"
+  className="inline-flex items-center gap-2 px-8 py-3 bg-green-600 text-white rounded-full font-semibold hover:bg-green-700 transition-all duration-300 hover:shadow-lg"
+>
+  
+  View All Teachers
+</Link>
       </div>
     </section>
   );

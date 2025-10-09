@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useCallback } from "react";
 import { DateTime } from "luxon";
 
 // ✅ Complete Country Data with Dial Codes
@@ -165,67 +165,68 @@ export default function BookTrialForm() {
   };
 
   // ✅ Timezone Conversion Function
-  const convertToPakistanTime = () => {
-    const dateInput = (document.querySelector('input[name="bookingDate"]') as HTMLInputElement)?.value;
-    const timeInput = (document.querySelector('input[name="localTime"]') as HTMLInputElement)?.value;
+const convertToPakistanTime = useCallback(() => {
+  const dateInput = (document.querySelector('input[name="bookingDate"]') as HTMLInputElement)?.value;
+  const timeInput = (document.querySelector('input[name="localTime"]') as HTMLInputElement)?.value;
 
-    if (!dateInput || !timeInput || !selectedCountry) {
-      setPakistanTime("");
+  if (!dateInput || !timeInput || !selectedCountry) {
+    setPakistanTime("");
+    return;
+  }
+
+  try {
+    const userTZ = getTimezoneForCountry(selectedCountry);
+    const userDateTime = DateTime.fromISO(`${dateInput}T${timeInput}`, { zone: userTZ });
+    const pkTime = userDateTime.setZone("Asia/Karachi");
+
+    if (!userDateTime.isValid || !pkTime.isValid) {
+      setPakistanTime("Invalid date/time selected");
       return;
     }
 
-    try {
-      const userTZ = getTimezoneForCountry(selectedCountry);
-      const userDateTime = DateTime.fromISO(`${dateInput}T${timeInput}`, { zone: userTZ });
-      const pkTime = userDateTime.setZone("Asia/Karachi");
+    setPakistanTime(
+      `User (${selectedCountry}) Local Time: ${userDateTime.toFormat("dd-MM-yyyy hh:mm a")} → Pakistan Time: ${pkTime.toFormat("dd-MM-yyyy hh:mm a")}`
+    );
+  } catch (error) {
+    console.error("Time conversion error:", error);
+    setPakistanTime("Error converting time");
+  }
+}, [selectedCountry]);
 
-      if (!userDateTime.isValid || !pkTime.isValid) {
-        setPakistanTime("Invalid date/time selected");
-        return;
-      }
+useEffect(() => {
+  convertToPakistanTime();
+}, [convertToPakistanTime]);
 
-      setPakistanTime(
-        `User (${selectedCountry}) Local Time: ${userDateTime.toFormat("dd-MM-yyyy hh:mm a")} → Pakistan Time: ${pkTime.toFormat("dd-MM-yyyy hh:mm a")}`
-      );
-    } catch (error) {
-      setPakistanTime("Error converting time");
+const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  e.preventDefault();
+  setLoading(true);
+
+  const form = e.currentTarget;
+  const formData = new FormData(form);
+  const data = Object.fromEntries(formData.entries());
+  data["pakistanTime"] = pakistanTime;
+  data["selectedCountry"] = selectedCountry;
+  data["countryCode"] = selectedPhoneCode;
+
+  try {
+    const res = await fetch("/api/booking", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    });
+    const result = await res.json();
+    if (result.success) {
+      setSuccess(true);
+    } else {
+      alert("Something went wrong! Try again.");
     }
-  };
-
-  useEffect(() => {
-    convertToPakistanTime();
-  }, [selectedCountry]);
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setLoading(true);
-
-    const form = e.currentTarget;
-    const formData = new FormData(form);
-    const data = Object.fromEntries(formData.entries());
-    data["pakistanTime"] = pakistanTime;
-    data["selectedCountry"] = selectedCountry;
-    data["countryCode"] = selectedPhoneCode;
-
-    try {
-      const res = await fetch("/api/booking", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
-      const result = await res.json();
-      if (result.success) {
-        setSuccess(true);
-      } else {
-        alert("Something went wrong! Try again.");
-      }
-    } catch (err) {
-      alert("Error submitting form.");
-    } finally {
-      setLoading(false);
-    }
-  };
-
+  } catch (error) { // ✅ _blank کی جگہ error استعمال کیا
+    console.error("Form submission error:", error);
+    alert("Error submitting form.");
+  } finally {
+    setLoading(false);
+  }
+};
   return (
     <section className="max-w-4xl mx-auto bg-white p-8 rounded-2xl shadow-lg my-16">
       <h2 className="text-3xl font-bold text-indigo-700 mb-6 text-center">
@@ -460,12 +461,12 @@ export default function BookTrialForm() {
 
           {/* Submit */}
           <button
-            type="submit"
-            disabled={loading}
-            className="bg-indigo-600 text-white px-8 py-3 rounded-full w-full hover:bg-indigo-700 transition disabled:opacity-50"
-          >
-            {loading ? "Submitting..." : "Send Booking Request / بُکنگ کی درخواست بھیجیں"}
-          </button>
+  type="submit"
+  disabled={loading}
+  className="bg-green-600 text-white px-8 py-3 rounded-full w-full hover:bg-green-700 transition disabled:opacity-50"
+>
+  {loading ? "Submitting..." : "Send Booking Request / بُکنگ کی درخواست بھیجیں"}
+</button>
         </form>
       )}
     </section>

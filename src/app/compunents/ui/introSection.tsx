@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-
+import Image from "next/image";
 export default function IntroSection() {
   return (
     <section 
@@ -44,7 +44,7 @@ export default function IntroSection() {
           viewport={{ once: true }}
           className="flex justify-center md:justify-end"
         >
-          <img
+          <Image
             src="/quran6.jpeg"
             alt="Open Quran with pen, symbolizing learning and teaching"
             className="w-full max-w-md rounded-2xl shadow-2xl object-cover transform hover:scale-105 transition duration-500"
