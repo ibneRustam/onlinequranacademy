@@ -1,47 +1,42 @@
+"use client";
 
 import Link from "next/link";
 import Image from "next/image";
+import * as coursesData from "@/app/data/coursesData";
 import { Phone, Mail, Facebook, Instagram, Twitter, Linkedin } from "lucide-react";
 
 export default function Footer() {
-  const currentYear = new Date().getFullYear();
-
   return (
     <footer className="bg-gray-900 text-gray-300">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 py-12 px-6">
-        {/* Brand Section */}
+        
+        {/* Brand */}
         <div className="space-y-4">
           <div className="flex items-center gap-3">
             <Image
               src="/logo.jpg"
-              alt="Taallumul Quran Academy Logo"
+              alt="TaallumulQuran Logo"
               width={60}
               height={60}
-              className="rounded-full border border-gray-700"
+              className="rounded-full"
             />
             <div>
-              <h3 className="text-white font-bold text-lg tracking-wide">
-                TaallumulQuran
-              </h3>
+              <h3 className="text-white font-bold text-lg">TaallumulQuran</h3>
               <p className="text-green-500 text-sm">Online Islamic Academy</p>
             </div>
           </div>
-          <p className="text-sm leading-relaxed">
-            Learn the Holy Quran with qualified teachers — from the comfort of your home.
-            We focus on correct recitation (Tajweed) and Quranic understanding for children and adults.
+          <p className="text-sm">
+            Learn Quran with qualified teachers from the comfort of your home.
           </p>
         </div>
 
         {/* Quick Links */}
         <div>
-          <h4 className="text-white font-semibold mb-4 uppercase">Quick Links</h4>
+          <h4 className="text-white font-semibold mb-4">Quick Links</h4>
           <ul className="space-y-2 text-sm">
-            {["Home", "About", "Courses", "Teachers", "Fees", "Contact"].map((item) => (
+            {['Home', 'About', 'Courses', 'Teachers', 'Fees', 'Contact'].map((item) => (
               <li key={item}>
-                <Link
-                  href={`/${item.toLowerCase()}`}
-                  className="hover:text-green-500 transition-colors duration-200"
-                >
+                <Link href={`/${item.toLowerCase()}`} className="hover:text-green-500 transition">
                   {item}
                 </Link>
               </li>
@@ -49,81 +44,61 @@ export default function Footer() {
           </ul>
         </div>
 
-        {/* Contact Info */}
+        {/* Courses */}
         <div>
-          <h4 className="text-white font-semibold mb-4 uppercase">Contact</h4>
-          <ul className="space-y-3 text-sm">
-            <li>
-              <a
-                href="https://wa.me/923142969508"
-                target="_blank"
-                className="flex items-center gap-2 hover:text-green-500 transition"
-              >
-                <Phone size={16} /> +92 314 2969508
-              </a>
-            </li>
-            <li>
-              <a
-                href="mailto:taallumulquranacademy@gmail.com"
-                className="flex items-center gap-2 hover:text-red-500 transition"
-              >
-                <Mail size={16} /> taallumulquranacademy@gmail.com
-              </a>
-            </li>
+          <h4 className="text-white font-semibold mb-4">Courses</h4>
+          <ul className="space-y-2 text-sm">
+            {coursesData.coursesData.slice(0, 5).map((course) => (
+              <li key={course.slug}>
+                <Link href={`/courses/${course.slug}`} className="hover:text-green-500 transition">
+                  {course.title}
+                </Link>
+              </li>
+            ))}
           </ul>
         </div>
 
-        {/* Social Media */}
+        {/* Contact */}
         <div>
-          <h4 className="text-white font-semibold mb-4 uppercase">Follow Us</h4>
-          <div className="flex gap-4">
-            <a
-              href="https://www.facebook.com/profile.php?id=61581040517143"
-              target="_blank"
-              aria-label="Facebook"
-              className="hover:text-blue-500 transition"
-            >
-              <Facebook size={20} />
+          <h4 className="text-white font-semibold mb-4">Contact</h4>
+          <div className="space-y-3 text-sm">
+            <a href="https://wa.me/923142969508" className="flex items-center gap-2 hover:text-green-500 transition">
+              <Phone size={16} />
+              +92 314 2969508
             </a>
-            <a
-              href="https://x.com/Taallumulquran"
-              target="_blank"
-              aria-label="Twitter"
-              className="hover:text-sky-400 transition"
-            >
-              <Twitter size={20} />
+            <a href="mailto:taallumulquranacademy@gmail.com" className="flex items-center gap-2 hover:text-red-600 transition">
+              <Mail size={16} />
+              taallumulquranacademy@gmail.com
             </a>
-            <a
-              href="https://www.linkedin.com/in/taallum-ul-quran-academy-1a1885386"
-              target="_blank"
-              aria-label="LinkedIn"
-              className="hover:text-blue-400 transition"
-            >
-              <Linkedin size={20} />
-            </a>
-            <a
-              href="https://www.instagram.com/taalumulquran/"
-              target="_blank"
-              aria-label="Instagram"
-              className="hover:text-pink-500 transition"
-            >
-              <Instagram size={20} />
-            </a>
+
+            {/* Social Media */}
+            <div className="flex gap-3 pt-2">
+              <Link href="https://www.facebook.com/profile.php?id=61581040517143" target="_blank">
+                <Facebook size={18} className="hover:text-blue-600 transition cursor-pointer" />
+              </Link>
+              <Link href="https://x.com/Taallumulquran" target="_blank">
+                <Twitter size={18} className="hover:text-sky-400 transition cursor-pointer" />
+              </Link>
+              <Link href="https://www.instagram.com/taalumulquran/" target="_blank">
+                <Instagram size={18} className="hover:text-pink-500 transition cursor-pointer" />
+              </Link>
+              <Link href="https://linkedin.com/in/taallum-ul-quran-academy-1a1885386" target="_blank">
+                <Linkedin size={18} className="hover:text-blue-400 transition cursor-pointer" />
+              </Link>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Bottom Bar */}
-      <div className="border-t border-gray-800 py-6 text-center text-sm text-gray-400">
-        © {currentYear} TaallumulQuran Academy — All Rights Reserved.  
-        <span className="block md:inline">
-          {" "} | Designed with ❤️ for Quran learners worldwide.
-        </span>
+      {/* Bottom */}
+      <div className="border-t border-gray-800 py-6">
+        <div className="max-w-7xl mx-auto px-6 text-center text-sm">
+          © {new Date().getFullYear()} TaallumulQuran Academy. All rights reserved.
+        </div>
       </div>
     </footer>
   );
 }
-
 
 
 
