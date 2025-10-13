@@ -25,7 +25,7 @@ export default function TeachersSection() {
     {
       id: 3,
       gender: "female",
-      name: "Ustadah Fatima",
+      name: "Teacher Fatima",
       role: "Tajweed Instructor",
       tagline: "Helping students master Tajweed",
       tags: ["Tajweed", "Recitation"],
