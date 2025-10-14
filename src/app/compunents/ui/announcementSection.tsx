@@ -79,10 +79,7 @@ export default function UpcomingEvents() {
           viewport={{ once: true }}
           className="text-center mt-12"
         >
-          <p className="text-gray-600 mb-4">Can&apos;t find what you&apos;re looking for?</p>
-          <button className="bg-green-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-green-700 transition-all duration-300 shadow-lg hover:shadow-xl">
-            View All Events
-          </button>
+          
         </motion.div>
       </div>
     </section>
