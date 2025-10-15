@@ -25,7 +25,7 @@ export default function Navbar() {
     { name: "About", href: "/about", icon: <Info className="w-4 h-4" /> },
     { name: "Courses", href: "/courses", icon: <Book className="w-4 h-4" /> },
     { name: "Teachers", href: "/teachers", icon: <Users className="w-4 h-4" /> },
-    { name: "Fees", href: "/fees", icon: <CreditCard className="w-4 h-4" /> },
+    { name: "Fees", href: "/fee", icon: <CreditCard className="w-4 h-4" /> },
     { name: "Contact", href: "/contact", icon: <Phone className="w-4 h-4" /> },
   ];
 
