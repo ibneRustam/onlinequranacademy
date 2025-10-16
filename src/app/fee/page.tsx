@@ -338,8 +338,9 @@ export default function FeesPage() {
               Book Free Trial Class
             </button>
             </Link>
-            </div>
+      
           </div>
+      
         </motion.div>
 
       </section>
