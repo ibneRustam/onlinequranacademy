@@ -293,7 +293,7 @@ export default function AboutPage() {
       transition={{ duration: 0.8 }}
       viewport={{ once: true, margin: "-100px" }}
     >
-      {/* سفید ہیڈنگ - بہترین */}
+      {/**/}
       <motion.h2
         className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 leading-tight"
         initial={{ opacity: 0, y: 30 }}
@@ -306,7 +306,7 @@ export default function AboutPage() {
         </span>
       </motion.h2>
       
-      {/* ہلکے سبز سَب ہیڈنگ */}
+      {/* */}
       <motion.p
         className="text-xl md:text-2xl lg:text-3xl mb-10 max-w-4xl mx-auto leading-relaxed opacity-95 font-light text-green-100"
         initial={{ opacity: 0, y: 20 }}
@@ -353,7 +353,7 @@ export default function AboutPage() {
         </motion.div>
       </motion.div>
 
-      {/* Features Grid - سفید ڈاٹس */}
+      {/* Features Grid */}
       <motion.div
         className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-2xl mx-auto text-sm md:text-base"
         initial={{ opacity: 0 }}
