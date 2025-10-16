@@ -333,11 +333,11 @@ export default function FeesPage() {
             <h3 className="text-2xl font-bold mb-4">Not Sure Which to Choose?</h3>
             <p className="text-gray-600 mb-6">Start with 2 free trial classes to experience our teaching quality</p>
             <Link
-            href="/registration"
+          
             <button className="bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all transform hover:scale-105">
               Book Free Trial Class
             </button>
-            </Link>
+      
       
           </div>
       
