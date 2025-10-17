@@ -90,129 +90,129 @@ useEffect(() => {
             transition={{ duration: 0.8 }}
             className="text-center text-white"
           >
-            {/* SEO-rich Heading */}
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">
-              Contact Us
-            </h1>
-            <p className="text-lg md:text-xl max-w-2xl mx-auto">
-              Get in touch for online Quran classes, Tajweed courses, Hifz program and Islamic studies with certified teachers
-            </p>
-          </motion.div>
+           {/* SEO-rich Heading */}
+<h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4 text-center sm:text-left">
+  Contact Us
+</h1>
+<p className="text-base sm:text-lg md:text-xl max-w-2xl mx-auto text-center sm:text-left text-gray-600">
+  Get in touch for online Quran classes, Tajweed courses, Hifz program and Islamic studies with certified teachers
+</p>
+</motion.div>
+</div>
+</section>
+
+{/* Main Content with Semantic HTML */}
+<section className="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-12 grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-10">
+  
+  {/* Contact Form */}
+  <article className="bg-white shadow-lg rounded-xl sm:rounded-2xl p-4 sm:p-6 lg:p-8 order-2 lg:order-1">
+    <h2 className="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6 text-gray-800 text-center sm:text-left">
+      Send Message for Quran Classes Inquiry
+    </h2>
+
+    <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4" noValidate>
+      <div>
+        <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+          Your Name *
+        </label>
+        <input
+          id="name"
+          name="name"
+          value={formData.name}
+          onChange={handleChange}
+          placeholder="Enter your full name"
+          className="w-full p-2 sm:p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent text-sm sm:text-base"
+          required
+          aria-required="true"
+        />
+      </div>
+
+      <div>
+        <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+          Email Address *
+        </label>
+        <input
+          id="email"
+          name="email"
+          type="email"
+          value={formData.email}
+          onChange={handleChange}
+          placeholder="your.email@example.com"
+          className="w-full p-2 sm:p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent text-sm sm:text-base"
+          required
+          aria-required="true"
+        />
+      </div>
+
+      {/* Country and Phone - Stack on mobile */}
+      <div className="flex flex-col gap-3">
+        <div>
+          <label htmlFor="country" className="block text-sm font-medium text-gray-700 mb-1">
+            Country *
+          </label>
+          <select
+            id="country"
+            name="country"
+            value={formData.country}
+            onChange={handleChange}
+            className="w-full p-2 sm:p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent text-sm sm:text-base"
+            required
+            aria-required="true"
+          >
+            <option value="">Select Your Country</option>
+            {countries.map((c, i) => {
+              const dial = (dialCodes as Record<string, string>)[c] ?? "";
+              return (
+                <option key={i} value={c}>
+                  {`${c} (${dial})`}
+                </option>
+              );
+            })}
+          </select>
         </div>
-      </section>
 
-      {/* Main Content with Semantic HTML */}
-      <section className="max-w-6xl mx-auto px-6 py-12 grid md:grid-cols-2 gap-10">
-        
-        {/* Contact Form */}
-        <article className="bg-white shadow-lg rounded-2xl p-8">
-          <h2 className="text-2xl font-semibold mb-6 text-gray-800">
-            Send Message for Quran Classes Inquiry
-          </h2>
+        <div>
+          <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
+            Phone Number *
+          </label>
+          <input
+            id="phone"
+            name="phone"
+            value={formData.phone}
+            onChange={handleChange}
+            placeholder="+92 300 1234567"
+            className="w-full p-2 sm:p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent text-sm sm:text-base"
+            required
+            aria-required="true"
+          />
+        </div>
+      </div>
 
-          <form onSubmit={handleSubmit} className="space-y-4" noValidate>
-            <div>
-              <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
-                Your Name *
-              </label>
-              <input
-                id="name"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                placeholder="Enter your full name"
-                className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
-                required
-                aria-required="true"
-              />
-            </div>
+      <div>
+        <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
+          Message *
+        </label>
+        <textarea
+          id="message"
+          name="message"
+          value={formData.message}
+          onChange={handleChange}
+          placeholder="Tell us about your Quran learning goals... (e.g., Tajweed course, Hifz program, Islamic studies, free trial request)"
+          rows={4}
+          className="w-full p-2 sm:p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent text-sm sm:text-base resize-vertical"
+          required
+          aria-required="true"
+        />
+      </div>
 
-            <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-                Email Address *
-              </label>
-              <input
-                id="email"
-                name="email"
-                type="email"
-                value={formData.email}
-                onChange={handleChange}
-                placeholder="your.email@example.com"
-                className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
-                required
-                aria-required="true"
-              />
-            </div>
-
-            {/* Country and Phone */}
-            <div className="flex flex-col md:flex-row gap-3">
-              <div className="flex-1">
-                <label htmlFor="country" className="block text-sm font-medium text-gray-700 mb-1">
-                  Country *
-                </label>
-                <select
-                  id="country"
-                  name="country"
-                  value={formData.country}
-                  onChange={handleChange}
-                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
-                  required
-                  aria-required="true"
-                >
-                  <option value="">Select Your Country</option>
-                  {countries.map((c, i) => {
-                    const dial = (dialCodes as Record<string, string>)[c] ?? "";
-                    return (
-                      <option key={i} value={c}>
-                        {`${c} (${dial})`}
-                      </option>
-                    );
-                  })}
-                </select>
-              </div>
-
-              <div className="flex-1">
-                <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
-                  Phone Number *
-                </label>
-                <input
-                  id="phone"
-                  name="phone"
-                  value={formData.phone}
-                  onChange={handleChange}
-                  placeholder="+92 300 1234567"
-                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
-                  required
-                  aria-required="true"
-                />
-              </div>
-            </div>
-
-            <div>
-              <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
-                Message *
-              </label>
-              <textarea
-                id="message"
-                name="message"
-                value={formData.message}
-                onChange={handleChange}
-                placeholder="Tell us about your Quran learning goals... (e.g., Tajweed course, Hifz program, Islamic studies, free trial request)"
-                rows={4}
-                className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
-                required
-                aria-required="true"
-              />
-            </div>
-
-            <button
-              type="submit"
-              className="w-full bg-green-600 text-white py-3 rounded-lg hover:bg-green-700 transition font-semibold shadow-md hover:shadow-lg"
-              aria-label="Send message for Quran classes inquiry"
-            >
-              Send Message 
-            </button>
-          </form>
+      <button
+        type="submit"
+        className="w-full bg-green-600 text-white py-2 sm:py-3 rounded-lg hover:bg-green-700 transition font-semibold shadow-md hover:shadow-lg text-sm sm:text-base"
+        aria-label="Send message for Quran classes inquiry"
+      >
+        Send Message 
+      </button>
+    </form>
 
           {status && (
             <motion.p

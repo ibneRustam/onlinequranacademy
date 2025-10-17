@@ -228,247 +228,247 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
   }
 };
   return (
-    <section className="max-w-4xl mx-auto bg-white p-8 rounded-2xl shadow-lg my-16">
-      <h2 className="text-3xl font-bold text-indigo-700 mb-6 text-center">
-        Book Your Free Trial / مفت ٹرائل بک کریں
-      </h2>
+  <section className="max-w-4xl mx-auto bg-white p-4 sm:p-6 md:p-8 rounded-xl sm:rounded-2xl shadow-lg my-8 sm:my-16">
+    <h2 className="text-2xl sm:text-3xl font-bold text-indigo-700 mb-4 sm:mb-6 text-center">
+      Book Your Free Trial / مفت ٹرائل بک کریں
+    </h2>
 
-      {success ? (
-        <div className="bg-green-100 text-green-800 p-6 rounded-xl text-center">
-          <h3 className="text-xl font-semibold mb-2">✅ Booking Request Received!</h3>
-          <p>آپ کی بُکنگ کی درخواست کامیابی سے موصول ہو چکی ہے۔ ان شاءاللہ ہم جلد آپ سے رابطہ کریں گے۔</p>
+    {success ? (
+      <div className="bg-green-100 text-green-800 p-4 sm:p-6 rounded-lg sm:rounded-xl text-center">
+        <h3 className="text-lg sm:text-xl font-semibold mb-2">✅ Booking Request Received!</h3>
+        <p className="text-sm sm:text-base">آپ کی بُکنگ کی درخواست کامیابی سے موصول ہو چکی ہے۔ ان شاءاللہ ہم جلد آپ سے رابطہ کریں گے۔</p>
+      </div>
+    ) : (
+      <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5">
+        {/* Full Name */}
+        <div>
+          <label className="font-semibold text-gray-700 text-sm sm:text-base">Full Name / پورا نام</label>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mt-1">
+            <div>
+              <label className="text-xs sm:text-sm text-gray-600">First Name / پہلا نام</label>
+              <input required type="text" name="firstName" placeholder="First Name" className="p-2 sm:p-3 border rounded w-full mt-1 text-sm sm:text-base" />
+            </div>
+            <div>
+              <label className="text-xs sm:text-sm text-gray-600">Last Name / آخری نام</label>
+              <input required type="text" name="lastName" placeholder="Last Name" className="p-2 sm:p-3 border rounded w-full mt-1 text-sm sm:text-base" />
+            </div>
+          </div>
         </div>
-      ) : (
-        <form onSubmit={handleSubmit} className="space-y-5">
-          {/* Full Name */}
-          <div>
-            <label className="font-semibold text-gray-700">Full Name / پورا نام</label>
-            <div className="grid md:grid-cols-2 gap-4 mt-1">
-              <div>
-                <label className="text-sm text-gray-600">First Name / پہلا نام</label>
-                <input required type="text" name="firstName" placeholder="First Name" className="p-3 border rounded w-full mt-1" />
-              </div>
-              <div>
-                <label className="text-sm text-gray-600">Last Name / آخری نام</label>
-                <input required type="text" name="lastName" placeholder="Last Name" className="p-3 border rounded w-full mt-1" />
-              </div>
+
+        {/* Email & DOB */}
+        <div>
+          <label className="font-semibold text-gray-700 text-sm sm:text-base">Email & Date of Birth / ای میل اور تاریخ پیدائش</label>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mt-1">
+            <div>
+              <label className="text-xs sm:text-sm text-gray-600">Email / ای میل</label>
+              <input required type="email" name="email" placeholder="Email Address" className="p-2 sm:p-3 border rounded w-full mt-1 text-sm sm:text-base" />
+            </div>
+            <div>
+              <label className="text-xs sm:text-sm text-gray-600">Date of Birth / تاریخ پیدائش</label>
+              <input required type="date" name="dob" className="p-2 sm:p-3 border rounded w-full mt-1 text-sm sm:text-base" />
             </div>
           </div>
+        </div>
 
-          {/* Email & DOB */}
-          <div>
-            <label className="font-semibold text-gray-700">Email & Date of Birth / ای میل اور تاریخ پیدائش</label>
-            <div className="grid md:grid-cols-2 gap-4 mt-1">
-              <div>
-                <label className="text-sm text-gray-600">Email / ای میل</label>
-                <input required type="email" name="email" placeholder="Email Address" className="p-3 border rounded w-full mt-1" />
-              </div>
-              <div>
-                <label className="text-sm text-gray-600">Date of Birth / تاریخ پیدائش</label>
-                <input required type="date" name="dob" className="p-3 border rounded w-full mt-1" />
-              </div>
+        {/* Gender & Contact - UPDATED */}
+        <div>
+          <label className="font-semibold text-gray-700 text-sm sm:text-base">Gender & Contact / صنف اور رابطہ نمبر</label>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mt-1">
+            <div>
+              <label className="text-xs sm:text-sm text-gray-600">Gender / صنف</label>
+              <select required name="studentGender" className="p-2 sm:p-3 border rounded w-full mt-1 text-sm sm:text-base">
+                <option value="">Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+              </select>
             </div>
-          </div>
-
-          {/* Gender & Contact - UPDATED */}
-          <div>
-            <label className="font-semibold text-gray-700">Gender & Contact / صنف اور رابطہ نمبر</label>
-            <div className="grid md:grid-cols-2 gap-4 mt-1">
-              <div>
-                <label className="text-sm text-gray-600">Gender / صنف</label>
-                <select required name="studentGender" className="p-3 border rounded w-full mt-1">
-                  <option value="">Select Gender</option>
-                  <option value="Male">Male</option>
-                  <option value="Female">Female</option>
-                </select>
-              </div>
-              
-              {/* ✅ Modern Phone Input with Search */}
-              <div>
-                <label className="text-sm text-gray-600">Contact Number / فون نمبر</label>
-                <div className="flex border rounded w-full mt-1 relative">
-                  {/* Phone Code Selector */}
-                  <div className="relative">
-                    <button
-                      type="button"
-                      onClick={() => setIsPhoneDropdownOpen(!isPhoneDropdownOpen)}
-                      className="p-3 border-r bg-gray-50 hover:bg-gray-100 w-32 flex items-center justify-between"
-                    >
-                      <span>{selectedPhoneCode}</span>
-                      <span>▼</span>
-                    </button>
-                    
-                    {/* Dropdown with Search */}
-                    {isPhoneDropdownOpen && (
-                      <div className="absolute top-full left-0 w-80 bg-white border rounded-lg shadow-lg z-50 max-h-80 overflow-hidden">
-                        {/* Search Input */}
-                        <div className="p-2 border-b">
-                          <input
-                            type="text"
-                            placeholder="Search country or code..."
-                            value={phoneSearch}
-                            onChange={(e) => setPhoneSearch(e.target.value)}
-                            className="w-full p-2 border rounded"
-                            autoFocus
-                          />
-                        </div>
-                        
-                        {/* Countries List */}
-                        <div className="overflow-y-auto max-h-60">
-                          {filteredPhoneCountries.map((country, index) => (
-                            <button
-                              key={index}
-                              type="button"
-                              onClick={() => {
-                                setSelectedPhoneCode(country.code);
-                                setIsPhoneDropdownOpen(false);
-                                setPhoneSearch("");
-                              }}
-                              className="w-full p-3 text-left hover:bg-gray-100 flex items-center gap-3"
-                            >
-                              <span className="text-xl">{country.flag}</span>
-                              <span className="flex-1">{country.name}</span>
-                              <span className="text-gray-600">{country.code}</span>
-                            </button>
-                          ))}
-                          
-                          {filteredPhoneCountries.length === 0 && (
-                            <div className="p-3 text-center text-gray-500">
-                              No countries found
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                    )}
-                  </div>
+            
+            {/* ✅ Modern Phone Input with Search */}
+            <div>
+              <label className="text-xs sm:text-sm text-gray-600">Contact Number / فون نمبر</label>
+              <div className="flex border rounded w-full mt-1 relative">
+                {/* Phone Code Selector */}
+                <div className="relative flex-shrink-0">
+                  <button
+                    type="button"
+                    onClick={() => setIsPhoneDropdownOpen(!isPhoneDropdownOpen)}
+                    className="p-2 sm:p-3 border-r bg-gray-50 hover:bg-gray-100 w-24 sm:w-32 flex items-center justify-between text-xs sm:text-sm"
+                  >
+                    <span className="truncate">{selectedPhoneCode}</span>
+                    <span className="ml-1">▼</span>
+                  </button>
                   
-                  {/* Phone Number Input */}
-                  <input 
-                    required 
-                    type="tel" 
-                    name="contact" 
-                    placeholder="Phone Number" 
-                    className="p-3 flex-1" 
-                  />
+                  {/* Dropdown with Search */}
+                  {isPhoneDropdownOpen && (
+                    <div className="absolute top-full left-0 w-72 sm:w-80 bg-white border rounded-lg shadow-lg z-50 max-h-64 sm:max-h-80 overflow-hidden">
+                      {/* Search Input */}
+                      <div className="p-2 border-b">
+                        <input
+                          type="text"
+                          placeholder="Search country or code..."
+                          value={phoneSearch}
+                          onChange={(e) => setPhoneSearch(e.target.value)}
+                          className="w-full p-2 border rounded text-sm"
+                          autoFocus
+                        />
+                      </div>
+                      
+                      {/* Countries List */}
+                      <div className="overflow-y-auto max-h-48 sm:max-h-60">
+                        {filteredPhoneCountries.map((country, index) => (
+                          <button
+                            key={index}
+                            type="button"
+                            onClick={() => {
+                              setSelectedPhoneCode(country.code);
+                              setIsPhoneDropdownOpen(false);
+                              setPhoneSearch("");
+                            }}
+                            className="w-full p-2 sm:p-3 text-left hover:bg-gray-100 flex items-center gap-2 sm:gap-3 text-xs sm:text-sm"
+                          >
+                            <span className="text-lg sm:text-xl">{country.flag}</span>
+                            <span className="flex-1 truncate">{country.name}</span>
+                            <span className="text-gray-600 text-xs sm:text-sm">{country.code}</span>
+                          </button>
+                        ))}
+                        
+                        {filteredPhoneCountries.length === 0 && (
+                          <div className="p-3 text-center text-gray-500 text-sm">
+                            No countries found
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  )}
                 </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Country & City */}
-          <div>
-            <label className="font-semibold text-gray-700">Country & City / ملک اور شہر</label>
-            <div className="grid md:grid-cols-2 gap-4 mt-1">
-              <div>
-                <label className="text-sm text-gray-600">Country / ملک</label>
-                <select
-                  required
-                  name="country"
-                  className="p-3 border rounded w-full mt-1"
-                  onChange={(e) => setSelectedCountry(e.target.value)}
-                  value={selectedCountry}
-                >
-                  <option value="">Select Country</option>
-                  {countriesWithDialCodes.map((country, i) => (
-                    <option key={i} value={country.name}>{country.name}</option>
-                  ))}
-                </select>
-              </div>
-              <div>
-                <label className="text-sm text-gray-600">City / شہر</label>
-                <input required type="text" name="city" placeholder="Enter City" className="p-3 border rounded w-full mt-1" />
-              </div>
-            </div>
-          </div>
-
-          {/* Course */}
-          <div>
-            <label className="font-semibold text-gray-700">Course Selection / منتخب کورس</label>
-            <div className="grid md:grid-cols-2 gap-4 mt-1">
-              <div>
-                <label className="text-sm text-gray-600">Select Course / کورس منتخب کریں</label>
-                <select required name="course" className="p-3 border rounded w-full mt-1">
-                  <option value="">Select Course</option>
-                  {courses.map((course, i) => (
-                    <option key={i} value={course}>{course}</option>
-                  ))}
-                </select>
-              </div>
-              <div>
-                <label className="text-sm text-gray-600">Custom Topic / اضافی موضوع</label>
-                <input type="text" name="customTopic" placeholder="Add Custom Topic (optional)" className="p-3 border rounded w-full mt-1" />
-              </div>
-            </div>
-          </div>
-
-          {/* Booking Date & Time */}
-          <div>
-            <label className="font-semibold text-gray-700">Booking Date & Time / تاریخ اور وقت</label>
-            <div className="grid md:grid-cols-2 gap-4 mt-1">
-              <div>
-                <label className="text-sm text-gray-600">Booking Date / تاریخ</label>
+                
+                {/* Phone Number Input */}
                 <input 
                   required 
-                  type="date" 
-                  name="bookingDate" 
-                  className="p-3 border rounded w-full mt-1" 
-                  onChange={convertToPakistanTime} 
-                  min={new Date().toISOString().split('T')[0]}
-                />
-              </div>
-              <div>
-                <label className="text-sm text-gray-600">Local Time / مقامی وقت</label>
-                <input 
-                  required 
-                  type="time" 
-                  name="localTime" 
-                  className="p-3 border rounded w-full mt-1" 
-                  onChange={convertToPakistanTime} 
+                  type="tel" 
+                  name="contact" 
+                  placeholder="Phone Number" 
+                  className="p-2 sm:p-3 flex-1 text-sm sm:text-base" 
                 />
               </div>
             </div>
           </div>
+        </div>
 
-          {/* Time Converter Display */}
-          <div>
-            <label className="font-semibold text-gray-700">Pakistan Time / پاکستانی وقت</label>
-            <input
-              type="text"
-              readOnly
-              name="pakistanTime"
-              value={pakistanTime}
-              placeholder="Select country, date and time to see Pakistan time"
-              className="p-3 border rounded bg-gray-100 w-full mt-1 text-center font-medium"
-            />
+        {/* Country & City */}
+        <div>
+          <label className="font-semibold text-gray-700 text-sm sm:text-base">Country & City / ملک اور شہر</label>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mt-1">
+            <div>
+              <label className="text-xs sm:text-sm text-gray-600">Country / ملک</label>
+              <select
+                required
+                name="country"
+                className="p-2 sm:p-3 border rounded w-full mt-1 text-sm sm:text-base"
+                onChange={(e) => setSelectedCountry(e.target.value)}
+                value={selectedCountry}
+              >
+                <option value="">Select Country</option>
+                {countriesWithDialCodes.map((country, i) => (
+                  <option key={i} value={country.name}>{country.name}</option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <label className="text-xs sm:text-sm text-gray-600">City / شہر</label>
+              <input required type="text" name="city" placeholder="Enter City" className="p-2 sm:p-3 border rounded w-full mt-1 text-sm sm:text-base" />
+            </div>
           </div>
+        </div>
 
-          {/* Teacher Gender */}
-          <div>
-            <label className="font-semibold text-gray-700">Preferred Teacher Gender / استاد کی جنس</label>
-            <select required name="teacherGender" className="p-3 border rounded w-full mt-1">
-              <option value="">Select Teacher Gender</option>
-              <option value="Male">Male</option>
-              <option value="Female">Female</option>
-              <option value="Any">Any</option>
-            </select>
+        {/* Course */}
+        <div>
+          <label className="font-semibold text-gray-700 text-sm sm:text-base">Course Selection / منتخب کورس</label>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mt-1">
+            <div>
+              <label className="text-xs sm:text-sm text-gray-600">Select Course / کورس منتخب کریں</label>
+              <select required name="course" className="p-2 sm:p-3 border rounded w-full mt-1 text-sm sm:text-base">
+                <option value="">Select Course</option>
+                {courses.map((course, i) => (
+                  <option key={i} value={course}>{course}</option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <label className="text-xs sm:text-sm text-gray-600">Custom Topic / اضافی موضوع</label>
+              <input type="text" name="customTopic" placeholder="Add Custom Topic (optional)" className="p-2 sm:p-3 border rounded w-full mt-1 text-sm sm:text-base" />
+            </div>
           </div>
+        </div>
 
-          {/* Message */}
-          <div>
-            <label className="font-semibold text-gray-700">Special Message / خصوصی پیغام</label>
-            <textarea name="message" placeholder="Write your message (optional)" className="p-3 border rounded w-full mt-1" rows={4}></textarea>
+        {/* Booking Date & Time */}
+        <div>
+          <label className="font-semibold text-gray-700 text-sm sm:text-base">Booking Date & Time / تاریخ اور وقت</label>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mt-1">
+            <div>
+              <label className="text-xs sm:text-sm text-gray-600">Booking Date / تاریخ</label>
+              <input 
+                required 
+                type="date" 
+                name="bookingDate" 
+                className="p-2 sm:p-3 border rounded w-full mt-1 text-sm sm:text-base" 
+                onChange={convertToPakistanTime} 
+                min={new Date().toISOString().split('T')[0]}
+              />
+            </div>
+            <div>
+              <label className="text-xs sm:text-sm text-gray-600">Local Time / مقامی وقت</label>
+              <input 
+                required 
+                type="time" 
+                name="localTime" 
+                className="p-2 sm:p-3 border rounded w-full mt-1 text-sm sm:text-base" 
+                onChange={convertToPakistanTime} 
+              />
+            </div>
           </div>
+        </div>
 
-          {/* Submit */}
-          <button
-  type="submit"
-  disabled={loading}
-  className="bg-green-600 text-white px-8 py-3 rounded-full w-full hover:bg-green-700 transition disabled:opacity-50"
->
-  {loading ? "Submitting..." : "Send Booking Request / بُکنگ کی درخواست بھیجیں"}
-</button>
-        </form>
-      )}
-    </section>
-  );
+        {/* Time Converter Display */}
+        <div>
+          <label className="font-semibold text-gray-700 text-sm sm:text-base">Pakistan Time / پاکستانی وقت</label>
+          <input
+            type="text"
+            readOnly
+            name="pakistanTime"
+            value={pakistanTime}
+            placeholder="Select country, date and time to see Pakistan time"
+            className="p-2 sm:p-3 border rounded bg-gray-100 w-full mt-1 text-center font-medium text-xs sm:text-sm"
+          />
+        </div>
+
+        {/* Teacher Gender */}
+        <div>
+          <label className="font-semibold text-gray-700 text-sm sm:text-base">Preferred Teacher Gender / استاد کی جنس</label>
+          <select required name="teacherGender" className="p-2 sm:p-3 border rounded w-full mt-1 text-sm sm:text-base">
+            <option value="">Select Teacher Gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Any">Any</option>
+          </select>
+        </div>
+
+        {/* Message */}
+        <div>
+          <label className="font-semibold text-gray-700 text-sm sm:text-base">Special Message / خصوصی پیغام</label>
+          <textarea name="message" placeholder="Write your message (optional)" className="p-2 sm:p-3 border rounded w-full mt-1 text-sm sm:text-base" rows={3}></textarea>
+        </div>
+
+        {/* Submit */}
+        <button
+          type="submit"
+          disabled={loading}
+          className="bg-green-600 text-white px-6 py-3 sm:px-8 sm:py-3 rounded-full w-full hover:bg-green-700 transition disabled:opacity-50 text-sm sm:text-base font-semibold"
+        >
+          {loading ? "Submitting..." : "Send Booking Request / بُکنگ کی درخواست بھیجیں"}
+        </button>
+      </form>
+    )}
+  </section>
+);
 }

@@ -535,7 +535,7 @@ export default function AboutPage() {
     >
       <div className="bg-white rounded-2xl p-8 shadow-lg border border-green-100 max-w-4xl mx-auto">
         <h3 className="text-2xl font-bold text-gray-900 mb-4">
-          🎯 <span className="text-green-600">100% Satisfaction Guarantee</span>
+         <span className="text-green-600">100% Satisfaction Guarantee</span>
         </h3>
         <p className="text-gray-600 text-lg mb-6">
           Join thousands of satisfied students who have transformed their Quran learning journey with us
@@ -595,21 +595,21 @@ export default function AboutPage() {
           title: "Select Your Course",
           description: "Choose from our comprehensive range of Quranic and Islamic studies programs tailored to your learning goals and level",
           color: "from-blue-500 to-blue-600",
-          icon: "📚"
+        
         },
         {
           step: "02", 
           title: "Book Free Trial Class",
           description: "Experience our teaching methodology with a complimentary session and meet your potential instructor",
           color: "from-green-500 to-green-600",
-          icon: "🎯"
+          
         },
         {
           step: "03",
           title: "Start Learning Journey", 
           description: "Begin structured lessons with certified teachers and join our global community of Quran learners",
           color: "from-purple-500 to-purple-600",
-          icon: "🚀"
+          
         }
       ].map((step, index) => (
         <motion.div
@@ -630,7 +630,7 @@ export default function AboutPage() {
             className="bg-white rounded-xl md:rounded-2xl p-6 md:p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 pt-12 text-center h-full"
             whileHover={{ y: -5 }}
           >
-            <div className="text-3xl mb-4">{step.icon}</div>
+            
             <h3 className="text-xl font-bold text-gray-900 mb-4">
               {step.title}
             </h3>
