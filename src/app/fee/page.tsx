@@ -2,14 +2,17 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Check, Clock, Users, BookOpen, Star, Zap, Calendar, Coffee, ChevronDown, Menu, X } from "lucide-react";
+import { Check, Clock, Users, BookOpen, Star, Zap, Calendar, Coffee, ChevronDown, Menu, X, Heart, Users2, Gift } from "lucide-react";
 import Link from "next/link";
-import Head from "next/head";
+
+import { coursesData } from "@/app/data/coursesData";
 
 export default function FeesPage() {
   const [selectedCourse, setSelectedCourse] = useState(0);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [customDays, setCustomDays] = useState(3);
+  const [showCustomPlan, setShowCustomPlan] = useState(false);
 
   // Handle scroll effect for header
   useEffect(() => {
@@ -20,428 +23,33 @@ export default function FeesPage() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const courses = [
-    {
-      id: 1,
-      name: "Noorani Qaida",
-      description: "Master Arabic alphabet & basic Quran reading",
-      level: "Beginner",
-      duration: "3-6 Months",
-      plans: [
-        {
-          days: 2,
-          price: 45,
-          originalPrice: 45,
-          discount: 0,
-          classes: 8,
-          sessionTime: "30 minutes",
-          popular: false,
-          features: [
-            "Arabic Alphabet Mastery",
-            "Basic Pronunciation", 
-            "Short Surahs Practice",
-            "Weekly Progress Reports"
-          ]
-        },
-        {
-          days: 5,
-          price: 99,
-          originalPrice: 112.50,
-          discount: 12,
-          classes: 20,
-          sessionTime: "30 minutes",
-          popular: true,
-          features: [
-            "Rapid Progress Track",
-            "Advanced Pronunciation",
-            "Quranic Foundation",
-            "Priority Support"
-          ]
-        },
-        {
-          days: 3,
-          price: 65,
-          originalPrice: 67.50,
-          discount: 4,
-          classes: 12,
-          sessionTime: "30 minutes",
-          popular: false,
-          features: [
-            "Fluent Letter Recognition",
-            "Tajweed Basics",
-            "Daily Practice Sessions",
-            "Certified Teacher"
-          ]
-        }
-      ]
-    },
-    {
-      id: 2,
-      name: "Nazira with Tajweed",
-      description: "Perfect your Quran recitation with Tajweed rules",
-      level: "Intermediate",
-      duration: "6-9 Months",
-      plans: [
-        {
-          days: 2,
-          price: 55,
-          originalPrice: 55,
-          discount: 0,
-          classes: 8,
-          sessionTime: "45 minutes",
-          popular: false,
-          features: [
-            "Tajweed Rules Application",
-            "Fluency Development",
-            "Quranic Phrase Practice"
-          ]
-        },
-        {
-          days: 5,
-          price: 118,
-          originalPrice: 134,
-          discount: 12,
-          classes: 20,
-          sessionTime: "45 minutes",
-          popular: true,
-          features: [
-            "Complete Tajweed Mastery",
-            "Ijazah Preparation",
-            "Expert Teacher"
-          ]
-        },
-        {
-          days: 3,
-          price: 78,
-          originalPrice: 81,
-          discount: 4,
-          classes: 12,
-          sessionTime: "45 minutes",
-          popular: false,
-          features: [
-            "Advanced Tajweed",
-            "Recitation Practice",
-            "Error Correction"
-          ]
-        }
-      ]
-    },
-    {
-      id: 3,
-      name: "Hifz Program",
-      description: "Memorize the Holy Quran with proper revision system",
-      level: "Advanced",
-      duration: "2-3 Years",
-      plans: [
-        {
-          days: 2,
-          price: 75,
-          originalPrice: 75,
-          discount: 0,
-          classes: 8,
-          sessionTime: "60 minutes",
-          popular: false,
-          features: [
-            "Memorization Techniques",
-            "Daily New Lesson",
-            "Revision System"
-          ]
-        },
-        {
-          days: 5,
-          price: 155,
-          originalPrice: 176,
-          discount: 12,
-          classes: 20,
-          sessionTime: "60 minutes",
-          popular: true,
-          features: [
-            "Rapid Memorization",
-            "Complete Revision System",
-            "Ijazah Certification"
-          ]
-        },
-        {
-          days: 3,
-          price: 105,
-          originalPrice: 109,
-          discount: 4,
-          classes: 12,
-          sessionTime: "60 minutes",
-          popular: false,
-          features: [
-            "Faster Memorization",
-            "Detailed Revision",
-            "Progress Tracking"
-          ]
-        }
-      ]
-    },
-    {
-      id: 4,
-      name: "Complete Tajweed",
-      description: "Master all Tajweed rules with practical implementation",
-      level: "Intermediate",
-      duration: "6-12 Months",
-      plans: [
-        {
-          days: 2,
-          price: 60,
-          originalPrice: 60,
-          discount: 0,
-          classes: 8,
-          sessionTime: "45 minutes",
-          popular: false,
-          features: [
-            "Theoretical Rules",
-            "Practical Application",
-            "Common Mistakes"
-          ]
-        },
-        {
-          days: 5,
-          price: 125,
-          originalPrice: 142,
-          discount: 12,
-          classes: 20,
-          sessionTime: "45 minutes",
-          popular: true,
-          features: [
-            "Complete Mastery",
-            "Certification Exam",
-            "Expert Guidance"
-          ]
-        },
-        {
-          days: 3,
-          price: 85,
-          originalPrice: 88,
-          discount: 4,
-          classes: 12,
-          sessionTime: "45 minutes",
-          popular: false,
-          features: [
-            "Advanced Rules",
-            "Quranic Examples",
-            "Practice Sessions"
-          ]
-        }
-      ]
-    },
-    {
-      id: 5,
-      name: "Qiraat & Lahjat",
-      description: "Learn different Quran recitation styles",
-      level: "Advanced",
-      duration: "12-18 Months",
-      plans: [
-        {
-          days: 2,
-          price: 70,
-          originalPrice: 70,
-          discount: 0,
-          classes: 8,
-          sessionTime: "45 minutes",
-          popular: false,
-          features: [
-            "Recitation Styles",
-            "Dialect Variations",
-            "Practical Sessions"
-          ]
-        },
-        {
-          days: 5,
-          price: 145,
-          originalPrice: 165,
-          discount: 12,
-          classes: 20,
-          sessionTime: "45 minutes",
-          popular: true,
-          features: [
-            "Complete Qiraat Course",
-            "Ijazah Preparation",
-            "Master Teacher"
-          ]
-        },
-        {
-          days: 3,
-          price: 98,
-          originalPrice: 102,
-          discount: 4,
-          classes: 12,
-          sessionTime: "45 minutes",
-          popular: false,
-          features: [
-            "Multiple Qiraat",
-            "Style Comparison",
-            "Expert Guidance"
-          ]
-        }
-      ]
-    },
-    {
-      id: 6,
-      name: "Darse Nizami",
-      description: "Comprehensive Islamic scholarship program",
-      level: "Advanced",
-      duration: "8 Years",
-      plans: [
-        {
-          days: 2,
-          price: 80,
-          originalPrice: 80,
-          discount: 0,
-          classes: 8,
-          sessionTime: "60 minutes",
-          popular: false,
-          features: [
-            "Islamic Sciences",
-            "Classical Texts",
-            "Scholarly Approach"
-          ]
-        },
-        {
-          days: 5,
-          price: 165,
-          originalPrice: 187,
-          discount: 12,
-          classes: 20,
-          sessionTime: "60 minutes",
-          popular: true,
-          features: [
-            "Complete Curriculum",
-            "Scholar Mentorship",
-            "Certification"
-          ]
-        },
-        {
-          days: 3,
-          price: 112,
-          originalPrice: 116,
-          discount: 4,
-          classes: 12,
-          sessionTime: "60 minutes",
-          popular: false,
-          features: [
-            "Advanced Studies",
-            "Text Analysis",
-            "Research Methods"
-          ]
-        }
-      ]
-    },
-    {
-      id: 7,
-      name: "Islamic Lectures",
-      description: "Islamic knowledge and guidance sessions",
-      level: "General",
-      duration: "Flexible (3 month to 1 Year or choose your custome program)",
-      plans: [
-        {
-          days: 2,
-          price: 40,
-          originalPrice: 40,
-          discount: 0,
-          classes: 8,
-          sessionTime: "45 minutes",
-          popular: false,
-          features: [
-            "Islamic Topics",
-            "Q&A Sessions",
-            "Guidance"
-          ]
-        },
-        {
-          days: 5,
-          price: 85,
-          originalPrice: 96,
-          discount: 12,
-          classes: 20,
-          sessionTime: "45 minutes",
-          popular: true,
-          features: [
-            "Comprehensive Program",
-            "Expert Scholar",
-            "Lifetime Access"
-          ]
-        },
-        {
-          days: 3,
-          price: 56,
-          originalPrice: 58,
-          discount: 4,
-          classes: 12,
-          sessionTime: "45 minutes",
-          popular: false,
-          features: [
-            "Detailed Discussions",
-            "Case Studies",
-            "Practical Advice"
-          ]
-        }
-      ]
-    },
-    {
-      id: 8,
-      name: "Fiqh & Islamic Law",
-      description: "In-depth study of Islamic jurisprudence",
-      level: "Advanced",
-      duration: "1 Year or choose custom",
-      plans: [
-        {
-          days: 2,
-          price: 65,
-          originalPrice: 65,
-          discount: 0,
-          classes: 8,
-          sessionTime: "45 minutes",
-          popular: false,
-          features: [
-            "Basic Fiqh Principles",
-            "Case Studies",
-            "Practical Rulings"
-          ]
-        },
-        {
-          days: 5,
-          price: 135,
-          originalPrice: 153,
-          discount: 12,
-          classes: 20,
-          sessionTime: "60 minutes",
-          popular: true,
-          features: [
-            "Complete Fiqh Course",
-            "Expert Jurist",
-            "Certification"
-          ]
-        },
-        {
-          days: 3,
-          price: 92,
-          originalPrice: 95,
-          discount: 4,
-          classes: 12,
-          sessionTime: "60 minutes",
-          popular: false,
-          features: [
-            "Advanced Fiqh",
-            "Comparative Study",
-            "Research"
-          ]
-        }
-      ]
-    }
-  ];
+  const currentCourse = coursesData[selectedCourse];
 
-  const currentCourse = courses[selectedCourse];
+  // Calculate custom plan pricing
+  const calculateCustomPlan = () => {
+    const baseRate = currentCourse.plans[0].price / currentCourse.plans[0].classes;
+    const classes = customDays * 4; // Approximate classes per month
+    const price = baseRate * classes;
+    
+    return {
+      days: customDays,
+      price: Math.round(price),
+      classes: classes,
+      sessionTime: currentCourse.plans[0].sessionTime,
+      features: [
+        "Fully Flexible Schedule",
+        "Personalized Curriculum",
+        "Certified Teacher",
+        "Progress Tracking",
+        "Custom Class Timing"
+      ]
+    };
+  };
+
+  const customPlan = calculateCustomPlan();
 
   return (
- 
-
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-green-50">
-
-
+    <>
         {/* Hero Section */}
         <section className="relative h-[70vh] min-h-[500px] bg-cover bg-center" style={{ backgroundImage: "url('/quran5.jpeg')" }}>
           <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-black/50 flex items-center justify-center pt-16">
@@ -512,7 +120,7 @@ export default function FeesPage() {
         {/* Features Banner */}
         <section className="bg-gradient-to-r from-green-600 to-emerald-600 py-12">
           <div className="max-w-6xl mx-auto px-4 sm:px-6">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center text-white">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center text-white">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -523,7 +131,7 @@ export default function FeesPage() {
                 <div className="bg-white/20 p-3 rounded-full mb-4">
                   <Clock className="w-8 h-8" />
                 </div>
-                <h3 className="text-xl font-bold mb-2">3 Days Free Trial Class</h3>
+                <h3 className="text-xl font-bold mb-2">3 Days Free Trial</h3>
                 <p className="text-green-100 text-sm">Experience before enrollment</p>
               </motion.div>
 
@@ -554,6 +162,20 @@ export default function FeesPage() {
                 <h3 className="text-xl font-bold mb-2">Flexible Schedule</h3>
                 <p className="text-green-100 text-sm">Learn at your convenience</p>
               </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4 }}
+                viewport={{ once: true }}
+                className="flex flex-col items-center"
+              >
+                <div className="bg-white/20 p-3 rounded-full mb-4">
+                  <Users2 className="w-8 h-8" />
+                </div>
+                <h3 className="text-xl font-bold mb-2">Family Discount</h3>
+                <p className="text-green-100 text-sm">Special rates for siblings</p>
+              </motion.div>
             </div>
           </div>
         </section>
@@ -575,7 +197,7 @@ export default function FeesPage() {
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-6xl mx-auto">
-              {courses.map((course, index) => (
+              {coursesData.map((course, index) => (
                 <motion.button
                   key={course.id}
                   whileHover={{ scale: 1.03 }}
@@ -613,7 +235,44 @@ export default function FeesPage() {
             <p className="text-gray-600 text-lg max-w-3xl mx-auto">
               {currentCourse.description}
             </p>
+            <Link href={`/courses/${currentCourse.slug}`}>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="mt-4 text-green-600 hover:text-green-700 font-semibold underline"
+              >
+                View Course Details →
+              </motion.button>
+            </Link>
           </motion.div>
+
+          {/* Family Discount Banner */}
+          {currentCourse.familyDiscount && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="mb-8 bg-gradient-to-r from-purple-600 to-indigo-600 rounded-2xl p-6 text-white text-center"
+            >
+              <div className="flex items-center justify-center gap-3 mb-3">
+                <Heart className="w-6 h-6" />
+                <h3 className="text-xl font-bold">Family Discount Available!</h3>
+                <Gift className="w-6 h-6" />
+              </div>
+              <p className="text-purple-100 max-w-2xl mx-auto">
+                Enroll multiple children from the same family and get up to <strong>20% discount</strong> on each additional child's fees!
+              </p>
+              <Link href="/contact">
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="mt-4 bg-white text-purple-600 px-6 py-2 rounded-lg font-semibold hover:bg-gray-100 transition-all"
+                >
+                  Get Family Discount
+                </motion.button>
+              </Link>
+            </motion.div>
+          )}
 
           {/* Journey Text */}
           <motion.div
@@ -626,12 +285,97 @@ export default function FeesPage() {
               Embark on Your Quran Learning Journey
             </h2>
             <p className="text-gray-600 text-lg max-w-2xl mx-auto flex items-center justify-center gap-2">
-            
+              <Coffee className="w-5 h-5 text-green-600" />
               Choose a Plan That Fits You - Stay connected every day for less than the cost of your daily coffee
             </p>
+            {currentCourse.customClassNote && (
+              <p className="text-green-600 font-semibold mt-4">
+                {currentCourse.customClassNote}
+              </p>
+            )}
           </motion.div>
 
-          {/* Pricing Cards - Most Popular in Middle */}
+          {/* Custom Plan Selector */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mb-8 text-center"
+          >
+            <button
+              onClick={() => setShowCustomPlan(!showCustomPlan)}
+              className="bg-white border-2 border-green-500 text-green-600 px-6 py-3 rounded-xl font-semibold hover:bg-green-50 transition-all"
+            >
+              {showCustomPlan ? 'Hide Custom Plan' : 'Create Custom Plan'}
+            </button>
+          </motion.div>
+
+          {/* Custom Plan */}
+          {showCustomPlan && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              className="mb-8 bg-white rounded-2xl p-8 shadow-lg border-2 border-green-500"
+            >
+              <div className="text-center mb-6">
+                <h3 className="text-2xl font-bold text-gray-900 mb-2">Create Your Custom Plan</h3>
+                <p className="text-gray-600">Choose exactly how many days per week you want to learn</p>
+              </div>
+
+              <div className="max-w-md mx-auto">
+                <div className="mb-6">
+                  <label className="block text-gray-700 font-semibold mb-3 text-center">
+                    Classes Per Week: <span className="text-green-600">{customDays}</span>
+                  </label>
+                  <input
+                    type="range"
+                    min="1"
+                    max="7"
+                    value={customDays}
+                    onChange={(e) => setCustomDays(parseInt(e.target.value))}
+                    className="w-full h-3 bg-gray-200 rounded-lg appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-green-600 [&::-webkit-slider-thumb]:border-2 [&::-webkit-slider-thumb]:border-white [&::-webkit-slider-thumb]:shadow-lg"
+                  />
+                  <div className="flex justify-between text-sm text-gray-500 mt-2">
+                    <span>1 Day</span>
+                    <span>7 Days</span>
+                  </div>
+                </div>
+
+                <div className="text-center">
+                  <div className="bg-green-50 rounded-xl p-6 mb-6">
+                    <h4 className="text-lg font-bold text-gray-900 mb-2">Your Custom Plan</h4>
+                    <div className="flex items-baseline justify-center gap-2 mb-2">
+                      <span className="text-3xl font-bold text-green-600">${customPlan.price}</span>
+                      <span className="text-gray-600">/month</span>
+                    </div>
+                    <p className="text-gray-600 text-sm">
+                      {customDays} days/week • {customPlan.classes} classes/month • {customPlan.sessionTime} sessions
+                    </p>
+                    <div className="mt-4 space-y-2">
+                      {customPlan.features.map((feature, idx) => (
+                        <div key={idx} className="flex items-center gap-2 text-sm text-gray-600">
+                          <Check className="w-4 h-4 text-green-500 flex-shrink-0" />
+                          {feature}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <Link href="/registration">
+                    <motion.button
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      className="bg-green-600 text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-green-700 transition-all shadow-lg w-full"
+                    >
+                      Get Custom Plan
+                    </motion.button>
+                  </Link>
+                </div>
+              </div>
+            </motion.div>
+          )}
+
+          {/* Pricing Cards */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {currentCourse.plans.map((plan, index) => (
               <motion.div
@@ -754,6 +498,54 @@ export default function FeesPage() {
             ))}
           </div>
 
+          {/* Additional Discounts Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mt-16 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-2xl p-8 text-white"
+          >
+            <div className="text-center mb-8">
+              <h3 className="text-3xl font-bold mb-4">Additional Discounts Available</h3>
+              <p className="text-xl opacity-90">Save more with our special discount programs</p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+              <div className="text-center bg-white/20 rounded-xl p-6">
+                <Users2 className="w-12 h-12 mx-auto mb-4" />
+                <h4 className="text-xl font-bold mb-2">Family Discount</h4>
+                <p className="text-blue-100">Up to 20% off for siblings</p>
+                <div className="mt-3 text-2xl font-bold">20% OFF</div>
+              </div>
+
+              <div className="text-center bg-white/20 rounded-xl p-6">
+                <Calendar className="w-12 h-12 mx-auto mb-4" />
+                <h4 className="text-xl font-bold mb-2">Quarterly Payment</h4>
+                <p className="text-blue-100">Pay for 3 months in advance</p>
+                <div className="mt-3 text-2xl font-bold">15% OFF</div>
+              </div>
+
+              <div className="text-center bg-white/20 rounded-xl p-6">
+                <Gift className="w-12 h-12 mx-auto mb-4" />
+                <h4 className="text-xl font-bold mb-2">Annual Payment</h4>
+                <p className="text-blue-100">Pay for 1 year in advance</p>
+                <div className="mt-3 text-2xl font-bold">25% OFF</div>
+              </div>
+            </div>
+
+            <div className="text-center mt-8">
+              <Link href="/contact">
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="bg-white text-blue-600 px-8 py-4 rounded-xl font-bold text-lg hover:bg-gray-100 transition-all shadow-2xl"
+                >
+                  Inquire About Discounts
+                </motion.button>
+              </Link>
+            </div>
+          </motion.div>
+
           {/* Final CTA */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -792,6 +584,6 @@ export default function FeesPage() {
             </div>
           </motion.div>
         </section>
-
-     </div>
-  )};
+        </>
+  );
+}

@@ -1,9 +1,8 @@
-
 import { coursesData } from "@/app/data/coursesData";
 import Image from "next/image";
 import { Metadata } from "next";
 import Link from "next/link";
-import { Clock, Users, Award, CheckCircle, Star, GraduationCap, } from "lucide-react";
+import { Clock, Users, Award, CheckCircle, Star, GraduationCap, DollarSign, Users2, Zap } from "lucide-react";
 
 interface Props {
   params: { slug: string };
@@ -35,7 +34,7 @@ const courseDetails = {
     description: "Our Noorani Qaida program provides the essential foundation for Quran reading. Students learn Arabic letters, proper pronunciation, and basic Tajweed rules through interactive sessions with certified instructors.",
     focus: "Education with character building - developing love for Quran from basics and establishing strong foundation"
   },
-  "nazira-tajweed": {
+  "nazira-with-tajweed": {
     title: "Nazira with Tajweed Course",
     duration: "6-9 months",
     level: "Beginner to Intermediate",
@@ -59,7 +58,7 @@ const courseDetails = {
     description: "Learn to read Quran fluently with proper Tajweed rules. This course focuses on developing smooth, correct Quran reading skills for daily recitation with beautiful pronunciation.",
     focus: "Education with character building - making Quran reading a daily habit with proper rules"
   },
-  "hifz-tajweed": {
+  "hifz-program": {
     title: "Hifz with Tajweed Course",
     duration: "2-3 years",
     level: "Advanced",
@@ -182,7 +181,7 @@ const courseDetails = {
     description: "Enhance your Islamic knowledge through specialized lectures, workshops, and research guidance. Get support for PhD papers, article writing, and comprehensive Islamic studies with expert scholars.",
     focus: "Education with character building - developing research skills and public speaking abilities for Islamic propagation"
   },
-  "fiqh-masaail": {
+  "fiqh-islamic-law": {
     title: "Fiqh & Islamic Rulings Course",
     duration: "6-12 months",
     level: "Intermediate to Advanced",
@@ -208,6 +207,7 @@ const courseDetails = {
     focus: "Education with character building - implementing Islamic rulings in daily life with understanding and wisdom"
   }
 };
+
 // SEO metadata
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const course = coursesData.find(c => c.slug === params.slug);
@@ -258,7 +258,7 @@ export default function CourseDetailPage({ params }: Props) {
                 {course.name}
               </h1>
               <p className="text-lg text-gray-600 mb-6 leading-relaxed">
-                {details.description}
+                {course.description}
               </p>
               <div className="flex flex-wrap gap-4">
                 <Link 
@@ -276,12 +276,14 @@ export default function CourseDetailPage({ params }: Props) {
               </div>
             </div>
             
-            <div className="relative h-80 rounded-2xl overflow-hidden shadow-lg bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center">
-              <div className="text-white text-center">
-                <GraduationCap className="w-16 h-16 mx-auto mb-4" />
-                <h3 className="text-xl font-bold mb-2">{course.name}</h3>
-                <p className="text-green-100">{course.level} Level</p>
-              </div>
+            <div className="relative h-80 rounded-2xl overflow-hidden shadow-lg">
+              <Image 
+                src={course.image} 
+                alt={`Learn ${course.name} with TaallumulQuran Academy - Online Quran Course`}
+                fill
+                className="object-cover"
+                priority
+              />
             </div>
           </div>
         </div>
@@ -297,8 +299,7 @@ export default function CourseDetailPage({ params }: Props) {
               
               <div className="prose prose-lg max-w-none text-gray-700">
                 <p className="text-xl leading-relaxed mb-8">
-                  Our <strong>{course.name}</strong> is designed to provide comprehensive Islamic education 
-                  with qualified teachers, focusing on both academic excellence and character development.
+                  {course.longDescription}
                 </p>
 
                 <h3 className="text-2xl font-semibold text-gray-900 mt-12 mb-6">What You Will Learn</h3>
@@ -398,7 +399,7 @@ export default function CourseDetailPage({ params }: Props) {
                 <h3 className="text-2xl font-bold text-gray-900 mb-6">Course Fees</h3>
                 
                 <div className="space-y-6">
-                  {course.plans.map((plan) => (
+                  {course.plans.map((plan, index) => (
                     <div
                       key={plan.days}
                       className={`border-2 rounded-xl p-4 ${
@@ -477,7 +478,7 @@ export default function CourseDetailPage({ params }: Props) {
                 {/* View All Pricing Link */}
                 <div className="mt-6 text-center">
                   <Link 
-                    href="/fees" 
+                    href="/fee" 
                     className="text-green-600 hover:text-green-700 font-semibold text-sm flex items-center justify-center gap-1"
                   >
                     View Complete Pricing Details
@@ -527,7 +528,7 @@ export default function CourseDetailPage({ params }: Props) {
               Start Free Trial Class
             </Link>
             <Link
-              href="/fees"
+              href="/fee"
               className="border border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-gray-900 transition-colors text-lg"
             >
               View All Pricing Plans
