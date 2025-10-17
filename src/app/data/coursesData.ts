@@ -1,5 +1,6 @@
 // ✅ TypeScript Interfaces (define once)
 export interface PlanType {
+  classes: string;
   days: number;
   price: string;
   discount: string;
@@ -7,6 +8,8 @@ export interface PlanType {
 }
 
 export interface CourseType {
+  level: ReactNode;
+  name: any;
   id: number;
   title: string;
   desc: string;

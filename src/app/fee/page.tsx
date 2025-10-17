@@ -26,7 +26,7 @@ export default function FeesPage() {
       name: "Noorani Qaida",
       description: "Master Arabic alphabet & basic Quran reading",
       level: "Beginner",
-      duration: "3 Months",
+      duration: "3-6 Months",
       plans: [
         {
           days: 2,
@@ -80,7 +80,7 @@ export default function FeesPage() {
       name: "Nazira with Tajweed",
       description: "Perfect your Quran recitation with Tajweed rules",
       level: "Intermediate",
-      duration: "6 Months",
+      duration: "6-9 Months",
       plans: [
         {
           days: 2,
@@ -182,7 +182,7 @@ export default function FeesPage() {
       name: "Complete Tajweed",
       description: "Master all Tajweed rules with practical implementation",
       level: "Intermediate",
-      duration: "4 Months",
+      duration: "6-12 Months",
       plans: [
         {
           days: 2,
@@ -233,7 +233,7 @@ export default function FeesPage() {
       name: "Qiraat & Lahjat",
       description: "Learn different Quran recitation styles",
       level: "Advanced",
-      duration: "6 Months",
+      duration: "12-18 Months",
       plans: [
         {
           days: 2,
@@ -335,7 +335,7 @@ export default function FeesPage() {
       name: "Islamic Lectures",
       description: "Islamic knowledge and guidance sessions",
       level: "General",
-      duration: "Flexible",
+      duration: "Flexible (3 month to 1 Year or choose your custome program)",
       plans: [
         {
           days: 2,
@@ -386,7 +386,7 @@ export default function FeesPage() {
       name: "Fiqh & Islamic Law",
       description: "In-depth study of Islamic jurisprudence",
       level: "Advanced",
-      duration: "1 Year",
+      duration: "1 Year or choose custom",
       plans: [
         {
           days: 2,
@@ -394,7 +394,7 @@ export default function FeesPage() {
           originalPrice: 65,
           discount: 0,
           classes: 8,
-          sessionTime: "60 minutes",
+          sessionTime: "45 minutes",
           popular: false,
           features: [
             "Basic Fiqh Principles",
@@ -626,7 +626,7 @@ export default function FeesPage() {
               Embark on Your Quran Learning Journey
             </h2>
             <p className="text-gray-600 text-lg max-w-2xl mx-auto flex items-center justify-center gap-2">
-              <Coffee className="w-5 h-5 text-green-600" />
+            
               Choose a Plan That Fits You - Stay connected every day for less than the cost of your daily coffee
             </p>
           </motion.div>

@@ -208,7 +208,6 @@ const courseDetails = {
     focus: "Education with character building - implementing Islamic rulings in daily life with understanding and wisdom"
   }
 };
-
 // SEO metadata
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const course = coursesData.find(c => c.slug === params.slug);
@@ -217,13 +216,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const details = courseDetails[params.slug as keyof typeof courseDetails];
   
   return {
-    title: `${course.title} - Online Quran Course | TaallumulQuran Academy`,
+    title: `${course.name} - Online Quran Course | TaallumulQuran Academy`,
     description: `${details?.description} ${details?.duration} program with ${details?.freeTrial}. Expert teachers, ${details?.sessions}.`,
-    keywords: `${course.title}, online Quran course, learn Quran, Tajweed course, Hifz program, Islamic studies, Quran classes, ${details?.level} level`,
+    keywords: `${course.name}, online Quran course, learn Quran, Tajweed course, Hifz program, Islamic studies, Quran classes, ${details?.level} level`,
     openGraph: {
-      title: `${course.title} - TaallumulQuran Academy`,
+      title: `${course.name} - TaallumulQuran Academy`,
       description: `${details?.description} Join now for ${details?.freeTrial}.`,
-      images: [course.image],
       type: 'website',
     },
     alternates: {
@@ -257,7 +255,7 @@ export default function CourseDetailPage({ params }: Props) {
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div>
               <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-                {course.title}
+                {course.name}
               </h1>
               <p className="text-lg text-gray-600 mb-6 leading-relaxed">
                 {details.description}
@@ -278,14 +276,12 @@ export default function CourseDetailPage({ params }: Props) {
               </div>
             </div>
             
-            <div className="relative h-80 rounded-2xl overflow-hidden shadow-lg">
-              <Image 
-                src={course.image} 
-                alt={`Learn ${course.title} with TaallumulQuran Academy - Online Quran Course`}
-                fill
-                className="object-cover"
-                priority
-              />
+            <div className="relative h-80 rounded-2xl overflow-hidden shadow-lg bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center">
+              <div className="text-white text-center">
+                <GraduationCap className="w-16 h-16 mx-auto mb-4" />
+                <h3 className="text-xl font-bold mb-2">{course.name}</h3>
+                <p className="text-green-100">{course.level} Level</p>
+              </div>
             </div>
           </div>
         </div>
@@ -301,7 +297,7 @@ export default function CourseDetailPage({ params }: Props) {
               
               <div className="prose prose-lg max-w-none text-gray-700">
                 <p className="text-xl leading-relaxed mb-8">
-                  Our <strong>{course.title}</strong> is designed to provide comprehensive Islamic education 
+                  Our <strong>{course.name}</strong> is designed to provide comprehensive Islamic education 
                   with qualified teachers, focusing on both academic excellence and character development.
                 </p>
 
@@ -333,82 +329,182 @@ export default function CourseDetailPage({ params }: Props) {
                     <strong>Education with Character Building:</strong> {details.focus}
                   </p>
                 </div>
-
-                <h3 className="text-2xl font-semibold text-gray-900 mt-12 mb-6">Expert Instructors</h3>
-                <p className="text-gray-700 mb-6 leading-relaxed">
-                  Learn from certified Islamic scholars with Ijazah and years of teaching experience. 
-                  Our instructors are not just educators but mentors dedicated to your spiritual and academic growth.
-                </p>
               </div>
             </div>
 
-            {/* Sidebar - Course Info */}
-            <div className="bg-gray-50 rounded-2xl p-8 h-fit sticky top-8">
-              <h3 className="text-2xl font-bold text-gray-900 mb-6">Course Details</h3>
-              
-              <div className="space-y-6">
-                <div className="flex items-center gap-4">
-                  <div className="bg-green-100 p-3 rounded-lg">
-                    <Clock className="w-6 h-6 text-green-600" />
+            {/* Sidebar - Course Info & Pricing */}
+            <div className="space-y-8">
+              {/* Course Details Card */}
+              <div className="bg-gray-50 rounded-2xl p-8">
+                <h3 className="text-2xl font-bold text-gray-900 mb-6">Course Details</h3>
+                
+                <div className="space-y-6">
+                  <div className="flex items-center gap-4">
+                    <div className="bg-green-100 p-3 rounded-lg">
+                      <Clock className="w-6 h-6 text-green-600" />
+                    </div>
+                    <div>
+                      <div className="text-sm text-gray-500">Course Duration</div>
+                      <div className="font-semibold text-gray-900">{details.duration}</div>
+                    </div>
                   </div>
-                  <div>
-                    <div className="text-sm text-gray-500">Course Duration</div>
-                    <div className="font-semibold text-gray-900">{details.duration}</div>
+
+                  <div className="flex items-center gap-4">
+                    <div className="bg-blue-100 p-3 rounded-lg">
+                      <Users className="w-6 h-6 text-blue-600" />
+                    </div>
+                    <div>
+                      <div className="text-sm text-gray-500">Session Length</div>
+                      <div className="font-semibold text-gray-900">{details.sessions}</div>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-4">
+                    <div className="bg-purple-100 p-3 rounded-lg">
+                      <Award className="w-6 h-6 text-purple-600" />
+                    </div>
+                    <div>
+                      <div className="text-sm text-gray-500">Skill Level</div>
+                      <div className="font-semibold text-gray-900">{details.level}</div>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-4">
+                    <div className="bg-yellow-100 p-3 rounded-lg">
+                      <Star className="w-6 h-6 text-yellow-600" />
+                    </div>
+                    <div>
+                      <div className="text-sm text-gray-500">Free Trial</div>
+                      <div className="font-semibold text-gray-900">{details.freeTrial}</div>
+                    </div>
                   </div>
                 </div>
 
-                <div className="flex items-center gap-4">
-                  <div className="bg-blue-100 p-3 rounded-lg">
-                    <Users className="w-6 h-6 text-blue-600" />
-                  </div>
-                  <div>
-                    <div className="text-sm text-gray-500">Session Length</div>
-                    <div className="font-semibold text-gray-900">{details.sessions}</div>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-4">
-                  <div className="bg-purple-100 p-3 rounded-lg">
-                    <Award className="w-6 h-6 text-purple-600" />
-                  </div>
-                  <div>
-                    <div className="text-sm text-gray-500">Skill Level</div>
-                    <div className="font-semibold text-gray-900">{details.level}</div>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-4">
-                  <div className="bg-yellow-100 p-3 rounded-lg">
-                    <Star className="w-6 h-6 text-yellow-600" />
-                  </div>
-                  <div>
-                    <div className="text-sm text-gray-500">Free Trial</div>
-                    <div className="font-semibold text-gray-900">{details.freeTrial}</div>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-4">
-                  <div className="bg-red-100 p-3 rounded-lg">
-                    <GraduationCap className="w-6 h-6 text-red-600" />
-                  </div>
-                  <div>
-                    <div className="text-sm text-gray-500">Instructors</div>
-                    <div className="font-semibold text-gray-900">Certified Experts</div>
-                  </div>
+                <div className="mt-8 pt-6 border-t">
+                  <Link 
+                    href="/registration" 
+                    className="w-full bg-green-600 text-white text-center py-4 rounded-lg font-semibold hover:bg-green-700 transition-colors block mb-3"
+                  >
+                    Enroll Now - {details.freeTrial}
+                  </Link>
+                  <p className="text-center text-gray-500 text-sm">
+                    No credit card required • Expert teachers
+                  </p>
                 </div>
               </div>
 
-              <div className="mt-8 pt-6 border-t">
-                <Link 
-                  href="/registration" 
-                  className="w-full bg-green-600 text-white text-center py-4 rounded-lg font-semibold hover:bg-green-700 transition-colors block mb-3"
-                >
-                  Enroll Now - {details.freeTrial}
-                </Link>
-                <p className="text-center text-gray-500 text-sm">
-                  No credit card required • Expert teachers
-                </p>
+              {/* Pricing Plans Card */}
+              <div className="bg-white border border-gray-200 rounded-2xl p-8 shadow-lg">
+                <h3 className="text-2xl font-bold text-gray-900 mb-6">Course Fees</h3>
+                
+                <div className="space-y-6">
+                  {course.plans.map((plan) => (
+                    <div
+                      key={plan.days}
+                      className={`border-2 rounded-xl p-4 ${
+                        plan.popular
+                          ? 'border-green-500 bg-green-50'
+                          : 'border-gray-200'
+                      }`}
+                    >
+                      {plan.popular && (
+                        <div className="bg-green-500 text-white px-3 py-1 rounded-full text-xs font-bold inline-block mb-3">
+                          MOST POPULAR
+                        </div>
+                      )}
+
+                      <h4 className="text-lg font-bold text-gray-900 mb-2">
+                        {plan.days} Days/Week
+                      </h4>
+                      
+                      <div className="flex items-baseline gap-2 mb-3">
+                        <span className="text-2xl font-bold text-green-600">
+                          ${plan.price}
+                        </span>
+                        {plan.discount > 0 && (
+                          <span className="text-sm text-gray-500 line-through">
+                            ${plan.originalPrice}
+                          </span>
+                        )}
+                        <span className="text-gray-600 text-sm">/month</span>
+                      </div>
+
+                      <div className="space-y-2 text-sm text-gray-600 mb-4">
+                        <div className="flex justify-between">
+                          <span>Classes:</span>
+                          <span className="font-semibold">{plan.classes}/month</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span>Duration:</span>
+                          <span className="font-semibold">{plan.sessionTime}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span>Cost/Class:</span>
+                          <span className="font-semibold text-green-600">
+                            ${(plan.price / plan.classes).toFixed(2)}
+                          </span>
+                        </div>
+                      </div>
+
+                      <Link href="/registration">
+                        <button
+                          className={`w-full py-3 rounded-lg font-semibold transition-all ${
+                            plan.popular
+                              ? 'bg-green-600 hover:bg-green-700 text-white'
+                              : 'bg-gray-900 hover:bg-black text-white'
+                          }`}
+                        >
+                          Choose This Plan
+                        </button>
+                      </Link>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Additional Discounts */}
+                <div className="mt-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
+                  <h4 className="font-semibold text-blue-900 mb-2 flex items-center gap-2">
+                    <Zap className="w-4 h-4" />
+                    Special Discounts Available
+                  </h4>
+                  <ul className="text-sm text-blue-800 space-y-1">
+                    <li>• Family Discount: Up to 20% off for siblings</li>
+                    <li>• Quarterly Payment: 15% discount</li>
+                    <li>• Annual Payment: 25% discount</li>
+                  </ul>
+                </div>
+
+                {/* View All Pricing Link */}
+                <div className="mt-6 text-center">
+                  <Link 
+                    href="/fees" 
+                    className="text-green-600 hover:text-green-700 font-semibold text-sm flex items-center justify-center gap-1"
+                  >
+                    View Complete Pricing Details
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </Link>
+                </div>
               </div>
+
+              {/* Family Discount Card */}
+              {course.familyDiscount && (
+                <div className="bg-gradient-to-r from-purple-500 to-indigo-600 rounded-2xl p-6 text-white">
+                  <div className="flex items-center gap-3 mb-3">
+                    <Users2 className="w-6 h-6" />
+                    <h4 className="font-bold text-lg">Family Discount</h4>
+                  </div>
+                  <p className="text-purple-100 text-sm mb-4">
+                    Enroll multiple children and save up to 20% on each additional child's fees!
+                  </p>
+                  <Link href="/contact">
+                    <button className="w-full bg-white text-purple-600 py-2 rounded-lg font-semibold hover:bg-gray-100 transition-colors text-sm">
+                      Inquire About Family Discount
+                    </button>
+                  </Link>
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -431,10 +527,10 @@ export default function CourseDetailPage({ params }: Props) {
               Start Free Trial Class
             </Link>
             <Link
-              href="/contact"
+              href="/fees"
               className="border border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-gray-900 transition-colors text-lg"
             >
-              Contact For Information
+              View All Pricing Plans
             </Link>
           </div>
         </div>
