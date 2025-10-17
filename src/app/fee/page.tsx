@@ -284,7 +284,7 @@ export default function FeesPage() {
             Embark on Your Quran Learning Journey
           </h2>
           <p className="text-gray-600 text-base sm:text-lg max-w-2xl mx-auto flex items-center justify-center gap-2 flex-col sm:flex-row">
-            <Coffee className="w-4 h-4 sm:w-5 sm:h-5 text-green-600" />
+           
             Choose a Plan That Fits You - Stay connected every day for less than the cost of your daily coffee
           </p>
           {currentCourse.customClassNote && (
