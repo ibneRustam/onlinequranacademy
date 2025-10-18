@@ -294,7 +294,7 @@ export default function FeesPage() {
           )}
         </motion.div>
 
-        {/* Custom Plan Selector */}
+        {/* Custom Plan Selector
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -310,7 +310,7 @@ export default function FeesPage() {
         </motion.div>
 
         {/* Custom Plan */}
-        {showCustomPlan && (
+        {/* {showCustomPlan && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
@@ -371,8 +371,10 @@ export default function FeesPage() {
                 </Link>
               </div>
             </div>
-          </motion.div>
-        )}
+          </motion.div> 
+           )}
+          */}
+        
 
         {/* Pricing Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 max-w-6xl mx-auto">
