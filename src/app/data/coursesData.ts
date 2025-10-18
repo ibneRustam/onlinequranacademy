@@ -1,11 +1,11 @@
-// data/coursesData.ts
+
 
 export interface Plan {
   days: number;
   price: number;
   originalPrice: number;
   discount: number;
-  classes: number;
+  // classes: number;
   sessionTime: string;
   popular: boolean;
   features: string[];
@@ -69,7 +69,7 @@ export const coursesData: Course[] = [
         price: 45,
         originalPrice: 45,
         discount: 0,
-        classes: 8,
+        // classes: 8,
         sessionTime: "30 minutes",
         popular: false,
         features: [
@@ -84,7 +84,7 @@ export const coursesData: Course[] = [
         price: 99,
         originalPrice: 112.50,
         discount: 12,
-        classes: 20,
+        // classes: 20,
         sessionTime: "30 minutes",
         popular: true,
         features: [
@@ -99,7 +99,7 @@ export const coursesData: Course[] = [
         price: 65,
         originalPrice: 67.50,
         discount: 4,
-        classes: 12,
+        // classes: 12,
         sessionTime: "30 minutes",
         popular: false,
         features: [
@@ -146,7 +146,7 @@ export const coursesData: Course[] = [
         price: 55,
         originalPrice: 55,
         discount: 0,
-        classes: 8,
+        // classes: 8,
         sessionTime: "45 minutes",
         popular: false,
         features: [
@@ -160,7 +160,7 @@ export const coursesData: Course[] = [
         price: 118,
         originalPrice: 134,
         discount: 12,
-        classes: 20,
+        // classes: 20,
         sessionTime: "45 minutes",
         popular: true,
         features: [
@@ -174,7 +174,7 @@ export const coursesData: Course[] = [
         price: 78,
         originalPrice: 81,
         discount: 4,
-        classes: 12,
+        // classes: 12,
         sessionTime: "45 minutes",
         popular: false,
         features: [
@@ -215,7 +215,7 @@ export const coursesData: Course[] = [
         price: 75,
         originalPrice: 75,
         discount: 0,
-        classes: 8,
+        // classes: 8,
         sessionTime: "60 minutes",
         popular: false,
         features: [
@@ -229,7 +229,7 @@ export const coursesData: Course[] = [
         price: 155,
         originalPrice: 176,
         discount: 12,
-        classes: 20,
+        // classes: 20,
         sessionTime: "60 minutes",
         popular: true,
         features: [
@@ -243,7 +243,7 @@ export const coursesData: Course[] = [
         price: 105,
         originalPrice: 109,
         discount: 4,
-        classes: 12,
+        // classes: 12,
         sessionTime: "60 minutes",
         popular: false,
         features: [
@@ -283,7 +283,7 @@ export const coursesData: Course[] = [
         price: 60,
         originalPrice: 60,
         discount: 0,
-        classes: 8,
+        // classes: 8,
         sessionTime: "45 minutes",
         popular: false,
         features: [
@@ -297,7 +297,7 @@ export const coursesData: Course[] = [
         price: 125,
         originalPrice: 142,
         discount: 12,
-        classes: 20,
+        // classes: 20,
         sessionTime: "45 minutes",
         popular: true,
         features: [
@@ -311,7 +311,7 @@ export const coursesData: Course[] = [
         price: 85,
         originalPrice: 88,
         discount: 4,
-        classes: 12,
+        // classes: 12,
         sessionTime: "45 minutes",
         popular: false,
         features: [
@@ -352,7 +352,7 @@ export const coursesData: Course[] = [
         price: 70,
         originalPrice: 70,
         discount: 0,
-        classes: 8,
+        // classes: 8,
         sessionTime: "45 minutes",
         popular: false,
         features: [
@@ -366,7 +366,7 @@ export const coursesData: Course[] = [
         price: 145,
         originalPrice: 165,
         discount: 12,
-        classes: 20,
+        // classes: 20,
         sessionTime: "45 minutes",
         popular: true,
         features: [
@@ -380,7 +380,7 @@ export const coursesData: Course[] = [
         price: 98,
         originalPrice: 102,
         discount: 4,
-        classes: 12,
+        // classes: 12,
         sessionTime: "45 minutes",
         popular: false,
         features: [
@@ -423,7 +423,7 @@ export const coursesData: Course[] = [
         price: 80,
         originalPrice: 80,
         discount: 0,
-        classes: 8,
+        // classes: 8,
         sessionTime: "60 minutes",
         popular: false,
         features: [
@@ -437,7 +437,7 @@ export const coursesData: Course[] = [
         price: 165,
         originalPrice: 187,
         discount: 12,
-        classes: 20,
+        // classes: 20,
         sessionTime: "60 minutes",
         popular: true,
         features: [
@@ -451,7 +451,7 @@ export const coursesData: Course[] = [
         price: 112,
         originalPrice: 116,
         discount: 4,
-        classes: 12,
+        // classes: 12,
         sessionTime: "60 minutes",
         popular: false,
         features: [
@@ -491,7 +491,7 @@ export const coursesData: Course[] = [
         price: 40,
         originalPrice: 40,
         discount: 0,
-        classes: 8,
+        // classes: 8,
         sessionTime: "45 minutes",
         popular: false,
         features: [
@@ -505,7 +505,7 @@ export const coursesData: Course[] = [
         price: 85,
         originalPrice: 96,
         discount: 12,
-        classes: 20,
+        // classes: 20,
         sessionTime: "45 minutes",
         popular: true,
         features: [
@@ -519,7 +519,7 @@ export const coursesData: Course[] = [
         price: 56,
         originalPrice: 58,
         discount: 4,
-        classes: 12,
+        // classes: 12,
         sessionTime: "45 minutes",
         popular: false,
         features: [
@@ -559,7 +559,7 @@ export const coursesData: Course[] = [
         price: 65,
         originalPrice: 65,
         discount: 0,
-        classes: 8,
+        // classes: 8,
         sessionTime: "45 minutes",
         popular: false,
         features: [
@@ -573,7 +573,7 @@ export const coursesData: Course[] = [
         price: 135,
         originalPrice: 153,
         discount: 12,
-        classes: 20,
+        // classes: 20,
         sessionTime: "60 minutes",
         popular: true,
         features: [
@@ -587,7 +587,7 @@ export const coursesData: Course[] = [
         price: 92,
         originalPrice: 95,
         discount: 4,
-        classes: 12,
+        // classes: 12,
         sessionTime: "60 minutes",
         popular: false,
         features: [

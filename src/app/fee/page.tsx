@@ -26,7 +26,7 @@ export default function FeesPage() {
 
   // Calculate custom plan pricing
   const calculateCustomPlan = () => {
-    const baseRate = currentCourse.plans[0].price / currentCourse.plans[0].classes;
+    const baseRate = currentCourse.plans[0].price ;
     const classes = customDays * 4; // Approximate classes per month
     const price = baseRate * classes;
     
@@ -447,7 +447,7 @@ export default function FeesPage() {
               <div className="space-y-2 sm:space-y-3 lg:space-y-4 mb-4 sm:mb-6">
                 <div className="flex justify-between items-center py-1 sm:py-2 border-b border-gray-200">
                   <span className="text-gray-600 text-xs sm:text-sm">Classes Monthly</span>
-                  <span className="font-semibold text-gray-900 text-xs sm:text-sm">{plan.classes} Classes</span>
+                  <span className="font-semibold text-gray-900 text-xs sm:text-sm">{plan.days} Classes</span>
                 </div>
                 
                 <div className="flex justify-between items-center py-1 sm:py-2 border-b border-gray-200">
@@ -455,12 +455,12 @@ export default function FeesPage() {
                   <span className="font-semibold text-gray-900 text-xs sm:text-sm">{plan.sessionTime}</span>
                 </div>
 
-                <div className="flex justify-between items-center py-1 sm:py-2 border-b border-gray-200">
+                {/* <div className="flex justify-between items-center py-1 sm:py-2 border-b border-gray-200">
                   <span className="text-gray-600 text-xs sm:text-sm">Cost Per Class</span>
                   <span className="font-semibold text-green-600 text-xs sm:text-sm">
-                    ${(plan.price / plan.classes).toFixed(2)}
+                    ${(plan.price / plan.originalPrice).toFixed(2)}
                   </span>
-                </div>
+                </div> */}
 
                 <div className="text-center text-xs sm:text-sm text-gray-500 mt-2 sm:mt-4">
                   Customize your course - Pay only for what you need

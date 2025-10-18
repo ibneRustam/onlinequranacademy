@@ -238,66 +238,64 @@ export default function ContactPage() {
           </h2>
           
           <div className="space-y-4 sm:space-y-6">
+            {/* Email - CLICKABLE FIXED */}
             <div className="flex items-start gap-3 sm:gap-4">
               <div className="bg-green-100 p-2 sm:p-3 rounded-lg flex-shrink-0">
                 <FaEnvelope className="w-4 h-4 sm:w-5 sm:h-5 text-green-600" />
               </div>
               <div>
                 <h3 className="font-semibold text-gray-900 text-sm sm:text-base">Email</h3>
-                <p className="text-gray-600 text-xs sm:text-sm">taallumulquranacademy@gmail.com</p>
-                <p className="text-gray-600 text-xs sm:text-sm">support@quranacademy.com</p>
+                <a 
+                  href="mailto:taallumulquranacademy@gmail.com"
+                  className="text-green-700 hover:text-green-800 text-xs sm:text-sm block mt-1"
+                >
+                  taallumulquranacademy@gmail.com
+                </a>
               </div>
             </div>
 
+            {/* WhatsApp - CLICKABLE FIXED */}
             <div className="flex items-start gap-3 sm:gap-4">
               <div className="bg-green-100 p-2 sm:p-3 rounded-lg flex-shrink-0">
                 <FaWhatsapp className="w-4 h-4 sm:w-5 sm:h-5 text-green-600" />
               </div>
               <div>
                 <h3 className="font-semibold text-gray-900 text-sm sm:text-base">WhatsApp</h3>
-                <p className="text-gray-600 text-xs sm:text-sm">+92 314 2969508</p>
                 <a 
                   href="https://wa.me/923142969508" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="text-green-700 hover:text-green-800 underline text-xs sm:text-sm"
+                  className="text-green-700 hover:text-green-800 text-xs sm:text-sm block mt-1"
                 >
-                  Send Message
+                  +92 314 2969508
                 </a>
               </div>
             </div>
 
+            {/* Phone - CLICKABLE FIXED */}
             <div className="flex items-start gap-3 sm:gap-4">
               <div className="bg-green-100 p-2 sm:p-3 rounded-lg flex-shrink-0">
                 <FaPhone className="w-4 h-4 sm:w-5 sm:h-5 text-green-600" />
               </div>
               <div>
                 <h3 className="font-semibold text-gray-900 text-sm sm:text-base">Phone</h3>
-                <p className="text-gray-600 text-xs sm:text-sm">+92 314 2969508</p>
                 <a 
                   href="tel:+923142969508" 
-                  className="text-green-700 hover:text-green-800 underline text-xs sm:text-sm"
+                  className="text-green-700 hover:text-green-800 text-xs sm:text-sm block mt-1"
                 >
-                  Call Now
+                  +92 314 2969508
                 </a>
               </div>
             </div>
 
-            {/* Social Media Links */}
+            {/* Social Media Links - SIMPLIFIED */}
             <div className="flex items-start gap-3 sm:gap-4">
               <div className="bg-green-100 p-2 sm:p-3 rounded-lg flex-shrink-0">
                 <FaLinkedin className="w-4 h-4 sm:w-5 sm:h-5 text-green-600" />
               </div>
               <div>
                 <h3 className="font-semibold text-gray-900 text-sm sm:text-base">LinkedIn</h3>
-                <a 
-                  href="https://www.linkedin.com/company/taallumul-quran-academy" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="text-green-700 hover:text-green-800 underline text-xs sm:text-sm"
-                >
-                  Follow on LinkedIn
-                </a>
+                <p className="text-gray-600 text-xs sm:text-sm mt-1">Taallumul Quran Academy</p>
               </div>
             </div>
 
@@ -307,14 +305,7 @@ export default function ContactPage() {
               </div>
               <div>
                 <h3 className="font-semibold text-gray-900 text-sm sm:text-base">Facebook</h3>
-                <a 
-                  href="https://www.facebook.com/profile.php?id=61581040517143" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="text-green-700 hover:text-green-800 underline text-xs sm:text-sm"
-                >
-                  Follow on Facebook
-                </a>
+                <p className="text-gray-600 text-xs sm:text-sm mt-1">Taallumul Quran Academy</p>
               </div>
             </div>
 
@@ -324,14 +315,7 @@ export default function ContactPage() {
               </div>
               <div>
                 <h3 className="font-semibold text-gray-900 text-sm sm:text-base">Instagram</h3>
-                <a 
-                  href="https://www.instagram.com/taalumulquran/" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="text-green-700 hover:text-green-800 underline text-xs sm:text-sm"
-                >
-                  Follow on Instagram
-                </a>
+                <p className="text-gray-600 text-xs sm:text-sm mt-1">@taalumulquran</p>
               </div>
             </div>
 
@@ -341,14 +325,7 @@ export default function ContactPage() {
               </div>
               <div>
                 <h3 className="font-semibold text-gray-900 text-sm sm:text-base">Twitter</h3>
-                <a 
-                  href="https://x.com/Taallumulquran" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="text-green-700 hover:text-green-800 underline text-xs sm:text-sm"
-                >
-                  Follow on Twitter
-                </a>
+                <p className="text-gray-600 text-xs sm:text-sm mt-1">@Taallumulquran</p>
               </div>
             </div>
           </div>
