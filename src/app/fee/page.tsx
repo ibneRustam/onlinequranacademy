@@ -283,10 +283,10 @@ export default function FeesPage() {
           <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-3 sm:mb-4">
             Embark on Your Quran Learning Journey
           </h2>
-          <p className="text-gray-600 text-base sm:text-lg max-w-2xl mx-auto flex items-center justify-center gap-2 flex-col sm:flex-row">
+          {/* <p className="text-gray-600 text-base sm:text-lg max-w-2xl mx-auto flex items-center justify-center gap-2 flex-col sm:flex-row">
            
             Choose a Plan That Fits You - Stay connected every day for less than the cost of your daily coffee
-          </p>
+          </p> */}
           {currentCourse.customClassNote && (
             <p className="text-green-600 font-semibold mt-3 sm:mt-4 text-sm sm:text-base">
               {currentCourse.customClassNote}
@@ -447,10 +447,11 @@ export default function FeesPage() {
 
               {/* Plan Details */}
               <div className="space-y-2 sm:space-y-3 lg:space-y-4 mb-4 sm:mb-6">
-                <div className="flex justify-between items-center py-1 sm:py-2 border-b border-gray-200">
-                  {/* <span className="text-gray-600 text-xs sm:text-sm">Classes Monthly</span>
-                  <span className="font-semibold text-gray-900 text-xs sm:text-sm">{plan.days} Classes</span> */}
-                </div>
+                 {/* <div className="flex justify-between items-center py-1 sm:py-2 border-b border-gray-200">
+                  <span className="text-gray-600 text-xs sm:text-sm">Classes Monthly</span>
+                  <span className="font-semibold text-gray-900 text-xs sm:text-sm">{plan.days} Classes</span> 
+                </div> 
+                  */}
                 
                 <div className="flex justify-between items-center py-1 sm:py-2 border-b border-gray-200">
                   <span className="text-gray-600 text-xs sm:text-sm">Session Duration</span>

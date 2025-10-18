@@ -431,20 +431,20 @@ export default function CourseDetailPage({ params }: Props) {
                       </div>
 
                       <div className="space-y-2 text-sm text-gray-600 mb-4">
-                        <div className="flex justify-between">
+                        {/* <div className="flex justify-between">
                           <span>Classes:</span>
                           <span className="font-semibold">{plan.classes}/month</span>
-                        </div>
+                        </div> */}
                         <div className="flex justify-between">
                           <span>Duration:</span>
                           <span className="font-semibold">{plan.sessionTime}</span>
                         </div>
-                        <div className="flex justify-between">
+                        {/* <div className="flex justify-between">
                           <span>Cost/Class:</span>
                           <span className="font-semibold text-green-600">
                             ${(plan.price / plan.classes).toFixed(2)}
                           </span>
-                        </div>
+                        </div> */}
                       </div>
 
                       <Link href="/registration">
