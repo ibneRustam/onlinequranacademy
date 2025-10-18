@@ -448,8 +448,8 @@ export default function FeesPage() {
               {/* Plan Details */}
               <div className="space-y-2 sm:space-y-3 lg:space-y-4 mb-4 sm:mb-6">
                 <div className="flex justify-between items-center py-1 sm:py-2 border-b border-gray-200">
-                  <span className="text-gray-600 text-xs sm:text-sm">Classes Monthly</span>
-                  <span className="font-semibold text-gray-900 text-xs sm:text-sm">{plan.days} Classes</span>
+                  {/* <span className="text-gray-600 text-xs sm:text-sm">Classes Monthly</span>
+                  <span className="font-semibold text-gray-900 text-xs sm:text-sm">{plan.days} Classes</span> */}
                 </div>
                 
                 <div className="flex justify-between items-center py-1 sm:py-2 border-b border-gray-200">
