@@ -275,7 +275,7 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
           <label className="font-semibold text-gray-700 text-sm sm:text-base">Gender & Contact / صنف اور رابطہ نمبر</label>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mt-1">
             <div>
-              <label className="text-xs sm:text-sm text-gray-600">Gender / صنف</label>
+              <label className="text-xs sm:text-sm text-gray-800">Gender / صنف</label>
               <select required name="studentGender  text-gray-800" className="p-2 sm:p-3 border rounded w-full mt-1 text-sm sm:text-base">
                 <option value="">Select Gender</option>
                 <option value="Male">Male</option>
@@ -386,8 +386,8 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
           <label className="font-semibold text-gray-700 text-sm sm:text-base">Course Selection / منتخب کورس</label>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mt-1">
             <div>
-              <label className="text-xs sm:text-sm text-gray-600">Select Course / کورس منتخب کریں</label>
-              <select required name="course" className="p-2 sm:p-3 border rounded w-full mt-1 text-sm sm:text-base">
+              <label className="text-xs sm:text-sm text-gray-800">Select Course / کورس منتخب کریں</label>
+              <select required name="course" className="text-gray-800 p-2 sm:p-3 border rounded w-full mt-1 text-sm sm:text-base">
                 <option value="">Select Course</option>
                 {courses.map((course, i) => (
                   <option key={i} value={course}>{course}</option>
