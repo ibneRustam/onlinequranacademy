@@ -220,7 +220,7 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     } else {
       alert("Something went wrong! Try again.");
     }
-  } catch (error) { // ✅ _blank کی جگہ error استعمال کیا
+  } catch (error) {
     console.error("Form submission error:", error);
     alert("Error submitting form.");
   } finally {
@@ -245,12 +245,12 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
           <label className="font-semibold text-gray-700 text-sm sm:text-base">Full Name / پورا نام</label>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mt-1">
             <div>
-              <label className="text-xs sm:text-sm text-gray-600">First Name / پہلا نام</label>
-              <input required type="text" name="firstName" placeholder="First Name" className="p-2 sm:p-3 border rounded w-full mt-1 text-sm sm:text-base" />
+              <label className="text-xs sm:text-sm text-gray-600 ">First Name / پہلا نام</label>
+              <input  required  type="text" name="firstName" placeholder="First Name" className="p-2 sm:p-3  text-gray-800 border rounded w-full mt-1 text-sm sm:text-base" />
             </div>
             <div>
               <label className="text-xs sm:text-sm text-gray-600">Last Name / آخری نام</label>
-              <input required type="text" name="lastName" placeholder="Last Name" className="p-2 sm:p-3 border rounded w-full mt-1 text-sm sm:text-base" />
+              <input required type="text" name="lastName" placeholder="Last Name" className="p-2 sm:p-3 border rounded w-full mt-1 text-sm sm:text-base  text-gray-800" />
             </div>
           </div>
         </div>
@@ -261,11 +261,11 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mt-1">
             <div>
               <label className="text-xs sm:text-sm text-gray-600">Email / ای میل</label>
-              <input required type="email" name="email" placeholder="Email Address" className="p-2 sm:p-3 border rounded w-full mt-1 text-sm sm:text-base" />
+              <input required type="email" name="email" placeholder="Email Address" className="p-2 sm:p-3 border rounded w-full mt-1 text-sm sm:text-base  text-gray-800" />
             </div>
             <div>
               <label className="text-xs sm:text-sm text-gray-600">Date of Birth / تاریخ پیدائش</label>
-              <input required type="date" name="dob" className="p-2 sm:p-3 border rounded w-full mt-1 text-sm sm:text-base" />
+              <input required type="date" name="dob" className="p-2 sm:p-3 border rounded w-full mt-1 text-sm sm:text-base  text-gray-800" />
             </div>
           </div>
         </div>
@@ -276,7 +276,7 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mt-1">
             <div>
               <label className="text-xs sm:text-sm text-gray-600">Gender / صنف</label>
-              <select required name="studentGender" className="p-2 sm:p-3 border rounded w-full mt-1 text-sm sm:text-base">
+              <select required name="studentGender  text-gray-800" className="p-2 sm:p-3 border rounded w-full mt-1 text-sm sm:text-base">
                 <option value="">Select Gender</option>
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
@@ -292,15 +292,15 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
                   <button
                     type="button"
                     onClick={() => setIsPhoneDropdownOpen(!isPhoneDropdownOpen)}
-                    className="p-2 sm:p-3 border-r bg-gray-50 hover:bg-gray-100 w-24 sm:w-32 flex items-center justify-between text-xs sm:text-sm"
+                    className="p-2 sm:p-3 border-r bg-gray-50 hover:bg-gray-100 w-24 sm:w-32 flex items-center justify-between text-xs sm:text-sm  text-gray-800"
                   >
                     <span className="truncate">{selectedPhoneCode}</span>
-                    <span className="ml-1">▼</span>
+                    <span className="ml-1  text-gray-800">▼</span>
                   </button>
                   
                   {/* Dropdown with Search */}
                   {isPhoneDropdownOpen && (
-                    <div className="absolute top-full left-0 w-72 sm:w-80 bg-white border rounded-lg shadow-lg z-50 max-h-64 sm:max-h-80 overflow-hidden">
+                    <div className="absolute top-full left-0 w-72 sm:w-80 bg-white border rounded-lg shadow-lg z-50 max-h-64 sm:max-h-80 overflow-hidden  text-gray-800">
                       {/* Search Input */}
                       <div className="p-2 border-b">
                         <input
@@ -308,7 +308,7 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
                           placeholder="Search country or code..."
                           value={phoneSearch}
                           onChange={(e) => setPhoneSearch(e.target.value)}
-                          className="w-full p-2 border rounded text-sm"
+                          className="w-full p-2 border rounded text-sm  text-gray-800"
                           autoFocus
                         />
                       </div>
@@ -328,12 +328,12 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
                           >
                             <span className="text-lg sm:text-xl">{country.flag}</span>
                             <span className="flex-1 truncate">{country.name}</span>
-                            <span className="text-gray-600 text-xs sm:text-sm">{country.code}</span>
+                            <span className="text-gray-800 text-xs sm:text-sm ">{country.code}</span>
                           </button>
                         ))}
                         
                         {filteredPhoneCountries.length === 0 && (
-                          <div className="p-3 text-center text-gray-500 text-sm">
+                          <div className="p-3 text-center text-gray-600 text-sm ">
                             No countries found
                           </div>
                         )}
@@ -348,7 +348,7 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
                   type="tel" 
                   name="contact" 
                   placeholder="Phone Number" 
-                  className="p-2 sm:p-3 flex-1 text-sm sm:text-base" 
+                  className="p-2 sm:p-3 flex-1 text-sm sm:text-base  text-gray-800" 
                 />
               </div>
             </div>
@@ -364,7 +364,7 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
               <select
                 required
                 name="country"
-                className="p-2 sm:p-3 border rounded w-full mt-1 text-sm sm:text-base"
+                className="p-2 sm:p-3 border rounded w-full mt-1 text-sm sm:text-base  text-gray-800"
                 onChange={(e) => setSelectedCountry(e.target.value)}
                 value={selectedCountry}
               >
@@ -376,7 +376,7 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
             </div>
             <div>
               <label className="text-xs sm:text-sm text-gray-600">City / شہر</label>
-              <input required type="text" name="city" placeholder="Enter City" className="p-2 sm:p-3 border rounded w-full mt-1 text-sm sm:text-base" />
+              <input required type="text" name="city" placeholder="Enter City" className="p-2 sm:p-3 border rounded w-full mt-1 text-sm sm:text-base  text-gray-800" />
             </div>
           </div>
         </div>
@@ -396,7 +396,7 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
             </div>
             <div>
               <label className="text-xs sm:text-sm text-gray-600">Custom Topic / اضافی موضوع</label>
-              <input type="text" name="customTopic" placeholder="Add Custom Topic (optional)" className="p-2 sm:p-3 border rounded w-full mt-1 text-sm sm:text-base" />
+              <input type="text" name="customTopic" placeholder="Add Custom Topic (optional)" className="p-2 sm:p-3 border rounded w-full mt-1 text-sm sm:text-base  text-gray-800" />
             </div>
           </div>
         </div>
@@ -406,12 +406,12 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
           <label className="font-semibold text-gray-700 text-sm sm:text-base">Booking Date & Time / تاریخ اور وقت</label>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mt-1">
             <div>
-              <label className="text-xs sm:text-sm text-gray-600">Booking Date / تاریخ</label>
+              <label className="text-xs sm:text-sm text-gray-800">Booking Date / تاریخ</label>
               <input 
                 required 
                 type="date" 
                 name="bookingDate" 
-                className="p-2 sm:p-3 border rounded w-full mt-1 text-sm sm:text-base" 
+                className="p-2 sm:p-3 border rounded w-full mt-1 text-sm sm:text-base  text-gray-800" 
                 onChange={convertToPakistanTime} 
                 min={new Date().toISOString().split('T')[0]}
               />
@@ -422,7 +422,7 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
                 required 
                 type="time" 
                 name="localTime" 
-                className="p-2 sm:p-3 border rounded w-full mt-1 text-sm sm:text-base" 
+                className="p-2 sm:p-3 border rounded w-full mt-1 text-sm sm:text-base  text-gray-800" 
                 onChange={convertToPakistanTime} 
               />
             </div>
@@ -438,14 +438,14 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
             name="pakistanTime"
             value={pakistanTime}
             placeholder="Select country, date and time to see Pakistan time"
-            className="p-2 sm:p-3 border rounded bg-gray-100 w-full mt-1 text-center font-medium text-xs sm:text-sm"
+            className="p-2 sm:p-3 border rounded  text-gray-500 bg-gray-100 w-full mt-1 text-center font-medium text-xs sm:text-sm"
           />
         </div>
 
         {/* Teacher Gender */}
         <div>
           <label className="font-semibold text-gray-700 text-sm sm:text-base">Preferred Teacher Gender / استاد کی جنس</label>
-          <select required name="teacherGender" className="p-2 sm:p-3 border rounded w-full mt-1 text-sm sm:text-base">
+          <select required name="teacherGender" className="p-2 sm:p-3 border rounded w-full mt-1 text-sm sm:text-base  text-gray-800">
             <option value="">Select Teacher Gender</option>
             <option value="Male">Male</option>
             <option value="Female">Female</option>
@@ -456,7 +456,7 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         {/* Message */}
         <div>
           <label className="font-semibold text-gray-700 text-sm sm:text-base">Special Message / خصوصی پیغام</label>
-          <textarea name="message" placeholder="Write your message (optional)" className="p-2 sm:p-3 border rounded w-full mt-1 text-sm sm:text-base" rows={3}></textarea>
+          <textarea name="message" placeholder="Write your message (optional)" className="p-2 sm:p-3 border rounded w-full mt-1  text-gray-800 text-sm sm:text-base" rows={3}></textarea>
         </div>
 
         {/* Submit */}

@@ -117,7 +117,7 @@ export default function ContactPage() {
                 value={formData.name}
                 onChange={handleChange}
                 placeholder="Enter your full name"
-                className="w-full p-2 sm:p-3 border text-gray-700 border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent text-sm sm:text-base"
+                className="w-full p-2 sm:p-3 border text-gray-800 border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent text-sm sm:text-base"
                 required
                 aria-required="true"
               />
@@ -134,7 +134,7 @@ export default function ContactPage() {
                 value={formData.email}
                 onChange={handleChange}
                 placeholder="your.email@example.com"
-                className="w-full p-2 sm:p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent text-sm sm:text-base"
+                className="w-full p-2 sm:p-3  text-gray-800 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent text-sm sm:text-base"
                 required
                 aria-required="true"
               />
@@ -151,11 +151,11 @@ export default function ContactPage() {
                   name="country"
                   value={formData.country}
                   onChange={handleChange}
-                  className="w-full p-2 sm:p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent text-sm sm:text-base"
+                  className="w-full p-2 sm:p-3  text-gray-800 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent text-sm sm:text-base"
                   required
                   aria-required="true"
                 >
-                  <option value="">Select Your Country</option>
+                  <option className=" text-gray-800" value="">Select Your Country</option>
                   {countries.map((c, i) => {
                     const dial = (dialCodes as Record<string, string>)[c] ?? "";
                     return (
@@ -177,7 +177,7 @@ export default function ContactPage() {
                   value={formData.phone}
                   onChange={handleChange}
                   placeholder="+92 300 1234567"
-                  className="w-full p-2 sm:p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent text-sm sm:text-base"
+                  className="w-full p-2 sm:p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500  text-gray-800 focus:border-transparent text-sm sm:text-base"
                   required
                   aria-required="true"
                 />
@@ -195,7 +195,7 @@ export default function ContactPage() {
                 onChange={handleChange}
                 placeholder="Tell us about your Quran learning goals... (e.g., Tajweed course, Hifz program, Islamic studies, free trial request)"
                 rows={4}
-                className="w-full p-2 sm:p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent text-sm sm:text-base resize-vertical"
+                className="w-full p-2 sm:p-3 border  text-gray-800 border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent text-sm sm:text-base resize-vertical"
                 required
                 aria-required="true"
               />
