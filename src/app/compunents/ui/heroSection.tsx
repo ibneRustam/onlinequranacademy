@@ -43,7 +43,7 @@ const courses = [
 
 export default function HeroSection() {
   return (
-    <section className="relative w-full h-screen">
+    <section className="relative w-full h-screen ">
       <Swiper
         modules={[Navigation, Pagination, Autoplay]}
         navigation
@@ -75,7 +75,7 @@ function SlideContent({ course }: { course: Course }) {
   const router = useRouter();
 
   return (
-    <div className="relative h-full flex items-center">
+    <div className="relative h-full flex items-center mx-20">
       {/* Background */}
       <Image
         src={course.bg}
@@ -150,7 +150,7 @@ function SlideContent({ course }: { course: Course }) {
 
         {/* Image with Animation */}
         <motion.div 
-          className="flex justify-center"
+          className="flex justify-center "
           initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, delay: 0.3 }}

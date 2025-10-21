@@ -16,7 +16,7 @@ export default function Home() {
       <IntroSection />
       <CoursesSection />
       <CallToAction />
-      <TeachersSection />
+      {/* <TeachersSection /> */}
       <AllNumberSection />
       <FeedbackSection />
       <AnnouncementSection />

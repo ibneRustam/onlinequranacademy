@@ -247,7 +247,7 @@ export default function ContactPage() {
                 <h3 className="font-semibold text-gray-900 text-sm sm:text-base">Email</h3>
                 <a 
                   href="mailto:taallumulquranacademy@gmail.com"
-                  className="text-green-700 hover:text-green-800 text-xs sm:text-sm block mt-1"
+                  className="text-green-700 hover:underline hover:text-green-800 text-xs sm:text-sm block mt-1"
                 >
                   taallumulquranacademy@gmail.com
                 </a>
@@ -265,7 +265,7 @@ export default function ContactPage() {
                   href="https://wa.me/923142969508" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="text-green-700 hover:text-green-800 text-xs sm:text-sm block mt-1"
+                  className="text-green-700 hover:underline hover:text-green-800 text-xs sm:text-sm block mt-1"
                 >
                   +92 314 2969508
                 </a>
@@ -281,7 +281,7 @@ export default function ContactPage() {
                 <h3 className="font-semibold text-gray-900 text-sm sm:text-base">Phone</h3>
                 <a 
                   href="tel:+923142969508" 
-                  className="text-green-700 hover:text-green-800 text-xs sm:text-sm block mt-1"
+                  className="text-green-700 hover:underline hover:text-green-800 text-xs sm:text-sm block mt-1"
                 >
                   +92 314 2969508
                 </a>
@@ -295,59 +295,110 @@ export default function ContactPage() {
               </div>
               <div>
                 <h3 className="font-semibold text-gray-900 text-sm sm:text-base">LinkedIn</h3>
-                <p className="text-gray-600 text-xs sm:text-sm mt-1">Taallumul Quran Academy</p>
+                <a 
+                  href="https://linkedin.com/in/taallum-ul-quran-academy-1a1885386" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-green-700 hover:underline hover:text-green-800 text-xs sm:text-sm block mt-1"
+                >
+                 Taallumul-Quran Academy 
+                </a>
               </div>
+             
             </div>
 
             <div className="flex items-start gap-3 sm:gap-4">
               <div className="bg-green-100 p-2 sm:p-3 rounded-lg flex-shrink-0">
                 <FaFacebook className="w-4 h-4 sm:w-5 sm:h-5 text-green-600" />
               </div>
+
               <div>
                 <h3 className="font-semibold text-gray-900 text-sm sm:text-base">Facebook</h3>
-                <p className="text-gray-600 text-xs sm:text-sm mt-1">Taallumul Quran Academy</p>
+                <a 
+                  href="https://www.facebook.com/profile.php?id=61581040517143" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-green-700 hover:underline hover:text-green-800 text-xs sm:text-sm block mt-1"
+                >
+                 Taallumul-Quran Academy 
+                </a>
               </div>
+          
             </div>
 
             <div className="flex items-start gap-3 sm:gap-4">
               <div className="bg-green-100 p-2 sm:p-3 rounded-lg flex-shrink-0">
                 <FaInstagram className="w-4 h-4 sm:w-5 sm:h-5 text-green-600" />
               </div>
+
               <div>
                 <h3 className="font-semibold text-gray-900 text-sm sm:text-base">Instagram</h3>
-                <p className="text-gray-600 text-xs sm:text-sm mt-1">@taalumulquran</p>
+                <a 
+                  href="https://www.instagram.com/taalumulquran/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-green-700 hover:underline hover:text-green-800 text-xs sm:text-sm block mt-1"
+                >
+                 Taallumul-Quran Academy 
+                </a>
               </div>
+              
+              
             </div>
 
             <div className="flex items-start gap-3 sm:gap-4">
               <div className="bg-green-100 p-2 sm:p-3 rounded-lg flex-shrink-0">
                 <FaTwitter className="w-4 h-4 sm:w-5 sm:h-5 text-green-600" />
               </div>
+
               <div>
                 <h3 className="font-semibold text-gray-900 text-sm sm:text-base">Twitter</h3>
-                <p className="text-gray-600 text-xs sm:text-sm mt-1">@Taallumulquran</p>
+                <a 
+                  href="https://x.com/Taallumulquran" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-green-700 hover:underline hover:text-green-800 text-xs sm:text-sm block mt-1"
+                >
+                 Taallumul-Quran Academy 
+                </a>
               </div>
+              
             </div>
           </div>
 
+
+
           {/* Location */}
           <div className="mt-6 sm:mt-8">
-            <h3 className="text-lg font-semibold mb-3 text-gray-800">Academy Location</h3>
-            <p className="flex items-center gap-2 text-gray-800 mb-3 text-sm sm:text-base">
-              <FaMapMarkerAlt className="text-red-600 text-xl" />
-              Jamshed Road No 1, Karachi, Pakistan
-            </p>
-            <iframe
-              title="Taallumul Quran Academy Location - Jamshed Road Karachi Pakistan"
-              src="https://www.google.com/maps?q=24.8835416,67.0470572&z=19&output=embed"
-              width="100%"
-              height="200"
-              loading="lazy"
-              className="rounded-lg border-0 shadow-md"
-              referrerPolicy="no-referrer-when-downgrade"
-              aria-label="Map showing TaallumulQuran Academy location in Karachi"
-            ></iframe>
-          </div>
+  <h3 className="text-lg font-semibold mb-3 text-gray-800">Academy Location</h3>
+  <div className="flex items-start gap-2 text-gray-800 mb-3 text-sm sm:text-base">
+    <FaMapMarkerAlt className="text-red-600 text-xl mt-1 flex-shrink-0" />
+    <div>
+      <a 
+        href="https://www.google.com/maps?ll=24.883542,67.047057&z=19&t=m&hl=en-US&gl=US&mapclient=embed&q=24%C2%B053%2700.8%22N+67%C2%B002%2749.4%22E+24.883542,+67.047057@24.8835416,67.0470572" 
+        target="_blank" 
+        rel="noopener noreferrer"
+        className="text-blue-700 hover:underline hover:text-blue-900 font-semibold text-sm sm:text-base block"
+      >
+        Jamshed Road No 1, Karachi, Pakistan
+      </a>
+      <p className="text-gray-600 text-xs sm:text-sm mt-1">
+        Click on address to open in Google Maps
+      </p>
+    </div>
+  </div>
+  
+  <iframe
+    title="Taallumul Quran Academy Location - Jamshed Road Karachi Pakistan"
+    src="https://www.google.com/maps?q=24.8835416,67.0470572&z=19&output=embed"
+    width="100%"
+    height="200"
+    loading="lazy"
+    className="rounded-lg border-0 shadow-md"
+    referrerPolicy="no-referrer-when-downgrade"
+    aria-label="Map showing TaallumulQuran Academy location in Karachi"
+  ></iframe>
+</div>
 
           {/* SEO Content Section */}
           <div className="mt-6 sm:mt-8 p-4 sm:p-6 bg-white rounded-lg border border-green-200">

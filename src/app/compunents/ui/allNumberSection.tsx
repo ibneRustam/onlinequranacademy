@@ -27,7 +27,7 @@ interface StatItemProps {
 
 export default function AllNumberSection() {
   const stats: Stat[] = [
-    { id: 1, label: "Certified Teachers", value: 50, icon: Users },
+    { id: 1, label: "Certified Teachers", value: 20, icon: Users },
     { id: 2, label: "Quran Courses", value: 12, icon: BookOpen },
     { id: 3, label: "Active Students", value: 500, icon: GraduationCap },
     { id: 4, label: "Countries Served", value: 25, icon: Briefcase },
