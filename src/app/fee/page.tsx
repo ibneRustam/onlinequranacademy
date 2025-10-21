@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Check, Clock, Users, BookOpen, Star, Zap, Calendar, Coffee, ChevronDown, Menu, X, Heart, Users2, Gift } from "lucide-react";
+import { Check, Clock, Users, BookOpen, Star, Zap, Calendar, ChevronDown, Menu, X, Heart, Users2, Gift } from "lucide-react";
 import Link from "next/link";
 import { coursesData } from "@/app/data/coursesData";
 
@@ -11,7 +11,7 @@ export default function FeesPage() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [customDays, setCustomDays] = useState(3);
-  const [showCustomPlan, setShowCustomPlan] = useState(false);
+  
 
   // Handle scroll effect for header
   useEffect(() => {
@@ -50,7 +50,7 @@ export default function FeesPage() {
   return (
     <>
       {/* Hero Section */}
-      <section className="relative h-[60vh] min-h-[400px] sm:h-[70vh] sm:min-h-[500px] bg-cover bg-center" style={{ backgroundImage: "url('/quran5.jpeg')" }}>
+      <section className="relative h-[60vh] min-h-[400px] sm:h-[70vh] sm:min-h-[500px] bg-cover bg-center bg-white" style={{ backgroundImage: "url('/quran5.jpeg')" }}>
         <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-black/50 flex items-center justify-center pt-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <motion.div

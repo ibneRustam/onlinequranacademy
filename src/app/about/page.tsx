@@ -49,7 +49,7 @@ export default function AboutPage() {
 
 
       {/* Academy Story Section */}
-<section className="py-16 md:py-20 px-4 sm:px-6 max-w-7xl mx-24">
+<section className="py-16 md:py-20 px-4 sm:px-6 max-w-7xl mx-auto">
   <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
     <motion.div
       initial={{ opacity: 0, x: -30 }}
@@ -95,7 +95,7 @@ export default function AboutPage() {
 </section>
 
      {/* Academic Excellence Section */}
-<section className="py-16 md:py-20 bg-gray-50 mx-16">
+<section className="py-16 md:py-20 bg-gray-50 mx-auto">
   <div className="max-w-7xl mx-auto px-4 sm:px-6">
     <motion.div
       initial={{ opacity: 0, y: 30 }}
