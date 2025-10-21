@@ -87,7 +87,7 @@ function SlideContent({ course }: { course: Course }) {
       <div className="absolute inset-0 bg-black/50" />
 
       {/* Content */}
-      <div className="relative z-10 max-w-7xl mx-24 px-6 grid lg:grid-cols-2 gap-8 items-center w-full">
+      <div className="relative z-10 max-w-6xl mx-24 px-6 grid lg:grid-cols-2 gap-8 items-center w-full">
         
         {/* Text Content with Animations */}
         <motion.div 
