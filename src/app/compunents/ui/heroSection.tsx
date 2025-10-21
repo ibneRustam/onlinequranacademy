@@ -43,7 +43,7 @@ const courses = [
 
 export default function HeroSection() {
   return (
-    <section className="relative w-full h-screen">
+    <section className="relative w-full h-screen ">
       <Swiper
         modules={[Navigation, Pagination, Autoplay]}
         navigation
@@ -87,17 +87,17 @@ function SlideContent({ course }: { course: Course }) {
       <div className="absolute inset-0 bg-black/50" />
 
       {/* Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 lg:gap-16 items-center w-full">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-8 items-center w-full">
         
         {/* Text Content with Animations */}
         <motion.div 
-          className="text-white space-y-8"
+          className="text-white space-y-6"
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
         >
           <motion.h1
-            className="text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1] tracking-tight"
+            className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -105,20 +105,25 @@ function SlideContent({ course }: { course: Course }) {
             {course.title}
           </motion.h1>
 
-          <motion.div
-            className="space-y-6"
+          <motion.p
+            className="text-lg md:text-xl leading-relaxed max-w-2xl"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            <p className="text-xl md:text-2xl leading-relaxed tracking-wide max-w-2xl font-light">
-              {expanded ? course.long : course.short}
-            </p>
+            {expanded ? course.long : course.short}
+          </motion.p>
 
-            {/* Read More Button */}
+          {/* Buttons with Animations */}
+          <motion.div 
+            className="flex flex-col sm:flex-row gap-4 items-start"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+          >
             <motion.button
               onClick={() => setExpanded(!expanded)}
-              className="text-white/90 hover:text-white underline hover:no-underline transition-all duration-300 text-lg font-medium"
+              className="text-white underline hover:no-underline transition"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -126,49 +131,33 @@ function SlideContent({ course }: { course: Course }) {
             </motion.button>
           </motion.div>
 
-          {/* CTA Buttons */}
           <motion.div 
-            className="flex flex-col sm:flex-row gap-6 pt-4"
+            className="flex gap-4"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
+            transition={{ duration: 0.8, delay: 0.8 }}
           >
             <motion.button
               onClick={() => router.push("/registration")}
-              className="bg-green-600 text-white px-10 py-4 rounded-xl font-semibold text-lg hover:bg-green-700 transition-all shadow-2xl min-w-[200px]"
-              whileHover={{ 
-                scale: 1.05, 
-                boxShadow: "0 15px 35px rgba(0,0,0,0.4)" 
-              }}
+              className="bg-green-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-green-700 transition shadow-lg"
+              whileHover={{ scale: 1.05, boxShadow: "0 10px 25px rgba(0,0,0,0.3)" }}
               whileTap={{ scale: 0.95 }}
             >
               Start Free Trial
-            </motion.button>
-            
-            <motion.button
-              onClick={() => router.push("/courses")}
-              className="border-2 border-white text-white px-10 py-4 rounded-xl font-semibold text-lg hover:bg-white hover:text-green-600 transition-all min-w-[200px]"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              View Courses
             </motion.button>
           </motion.div>
         </motion.div>
 
         {/* Image with Animation */}
         <motion.div 
-          className="flex justify-center lg:justify-end"
+          className="flex justify-center "
           initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, delay: 0.3 }}
         >
           <motion.div 
-            className="relative w-80 h-80 md:w-96 md:h-96 rounded-3xl overflow-hidden shadow-2xl border-4 border-white/20"
-            whileHover={{ 
-              scale: 1.05,
-              borderColor: "rgba(255,255,255,0.4)"
-            }}
+            className="relative w-80 h-80 md:w-96 md:h-96 rounded-2xl overflow-hidden shadow-2xl"
+            whileHover={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 300 }}
           >
             <Image
@@ -176,7 +165,6 @@ function SlideContent({ course }: { course: Course }) {
               alt={course.title}
               fill
               className="object-cover"
-              priority
             />
           </motion.div>
         </motion.div>
