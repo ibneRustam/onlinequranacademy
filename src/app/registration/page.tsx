@@ -272,14 +272,14 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 
         {/* Gender & Contact - UPDATED */}
         <div>
-          <label className="font-semibold text-gray-700 text-sm sm:text-base">Gender & Contact / صنف اور رابطہ نمبر</label>
+          <label className="font-semibold text-gray-800 text-sm sm:text-base">Gender & Contact / صنف اور رابطہ نمبر</label>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mt-1">
             <div>
               <label className="text-xs sm:text-sm text-gray-800">Gender / صنف</label>
-              <select required name="studentGender text-gray-800" className="p-2 sm:p-3 border rounded w-full mt-1 text-sm sm:text-base">
-                <option className="text-gray-800" value="">Select Gender</option>
-                <option className="text-gray-800" value="Male">Male</option>
-                <option className="text-gray-800" value="Female">Female</option>
+              <select required name="studentGender" className="p-2 sm:p-3  text-gray-800 border rounded w-full mt-1 text-sm sm:text-base">
+                <option  value="">Select Gender</option>
+                <option value="Male">Male</option>
+                <option  value="Female">Female</option>
               </select>
             </div>
             
