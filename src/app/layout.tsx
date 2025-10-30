@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "./compunents/ui/navbar";
 import Footer from "./compunents/ui/footer";
+import Image from "next/image";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -56,8 +57,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link rel="icon" href="/logo.jpg" type="image/jpeg" sizes="32x32" />
-      </head>
+  <link rel="icon" href="/logo.jpg" />
+</head>
       <body className={`${inter.className} bg-gray-50 text-gray-900`}>
         <Navbar />
         <main>{children}</main>
