@@ -57,8 +57,8 @@ export default function RootLayout({
   return (
     <html lang="en">
        <head>
-        <link rel="icon" href="/logo.jpg" type="image/png" sizes="32x32" />
-      </head>
+  <link rel="icon" href="/logo.jpg" type="image/jpeg" sizes="32x32" />
+</head>
       <body className={`${inter.className} bg-gray-50 text-gray-900`}>
         <Navbar />
         <main>{children}</main>
