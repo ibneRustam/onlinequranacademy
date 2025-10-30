@@ -32,17 +32,21 @@ export default function Footer() {
 
         {/* Quick Links */}
         <div>
-          <h4 className="text-white font-semibold mb-4">Quick Links</h4>
-          <ul className="space-y-2 text-sm">
-            {['Home', 'About', 'Courses', 'Fee', 'Contact'].map((item) => (
-              <li key={item}>
-                <Link href={`/${item.toLowerCase()}`} className="hover:text-green-500 transition">
-                  {item}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
+  <h4 className="text-white font-semibold mb-4">Quick Links</h4>
+  <ul className="space-y-2 text-sm">
+    {['Home', 'About', 'Courses', 'Fee', 'Contact'].map((item) => (
+      <li key={item}>
+        <Link
+          href={item === 'Home' ? '/' : `/${item.toLowerCase()}`}
+          className="hover:text-green-500 transition"
+        >
+          {item}
+        </Link>
+      </li>
+    ))}
+  </ul>
+</div>
+
 
         {/* Courses */}
         <div>
